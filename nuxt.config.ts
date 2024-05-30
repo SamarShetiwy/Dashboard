@@ -4,7 +4,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     'nuxt-graphql-client',
-    '@nuxtjs/color-mode'
+    '@nuxtjs/color-mode',
+    'nuxt-icon'
   ],
   colorMode: {
     classSuffix: ''
@@ -21,5 +22,6 @@ export default defineNuxtConfig({
     cssPath: '~/assets/css/tailwind.css'
 
   },
+    plugins: ['~/plugins/modal.js']
 
 })

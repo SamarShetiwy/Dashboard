@@ -1,0 +1,34 @@
+
+mutation EmailAndPasswordLoginBoard($input: LoginBoardInput!) {
+    emailAndPasswordLoginBoard(input: $input) {
+      data {
+        id
+        email
+        token
+      }
+      code
+      success
+      message
+    }
+  }
+
+query getUsersBoard($filter: UsersBoardFilter!, $paginate: PaginatorInput, $sortBy: UsersBoardSortEnum) {
+    usersBoard(filter: $filter, paginate: $paginate, sortBy: $sortBy) {
+    data{
+        items{
+          firstName
+          nickname
+          birthDate
+          age
+          gender
+          email
+          city {
+            id
+          }
+        }
+      }
+      code
+      success
+      message
+    }
+    }

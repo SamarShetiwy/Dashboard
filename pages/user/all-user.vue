@@ -1,5 +1,7 @@
 <template lang="pug">
-h2 55
+div
+userAllUser
+
 </template>
 
 <script setup>
