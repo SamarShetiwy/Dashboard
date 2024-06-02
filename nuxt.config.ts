@@ -5,8 +5,16 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     'nuxt-graphql-client',
     '@nuxtjs/color-mode',
-    'nuxt-icon'
+    'nuxt-icon',
+    '@davestewart/nuxt-scrollbar'
   ],
+  nuxtIcon: {
+    size: '24px', 
+    class: 'icon',
+    aliases: {
+      'nuxt': 'logos:nuxt-icon',
+    }
+  },
   colorMode: {
     classSuffix: ''
   },
