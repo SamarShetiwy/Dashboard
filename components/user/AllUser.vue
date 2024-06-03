@@ -18,7 +18,7 @@ div.container.mx-auto.pt-5.ml-7.shadow-xl.mt-5
                                         th.px-6.py-4 Age
                                         th.px-6.py-4 Gender
                                         th.px-6.py-4 Action 
-                                tbody
+                                tbody.border-b
                                     tr(v-for="user in users" :key="user.id")
                                         td.px-6.py-4 {{ user.firstName }}
                                         td.px-6.py-4 {{ user.nickname }}

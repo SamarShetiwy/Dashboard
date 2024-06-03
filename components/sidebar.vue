@@ -1,18 +1,30 @@
 <template lang="pug">
-side(class="w- h-screen px-10 py-2")
-            div.flex.items-center.justify-center.py-4
-                img.rounded-full.border-radius-50.h-20(src="/assets/images/2.jpg" alt="Logo")
-            NuxtScrollbar(tag="aside" @ps-scroll-y="onScroll")    
-                NuxtLink(to="/")
-                Icon(name="material-symbols:dashboard" color="black")
-                h1.text-semibold.text-xl.text-black Dashboard
-                ul
-                li(v-for="item in menu" :key="item.name")
-                    NuxtLink(:to="item.to")
-                        li.py-3.text-2xl.text-semibold {{ item.name }}
-                    ul(v-if="item.items")
-                        li(v-for="subItem in item.items" :key="subItem.tittle" class="pl-4 py-1")
-                            NuxtLink(:to="subItem.to") {{ subItem.tittle }}       
+div.flex.items-center.justify-center.py-4.mb-5
+    img.rounded-full.border-radius-50.h-20(src="/assets/images/2.jpg" alt="Logo")
+NuxtScrollbar(tag="aside" @ps-scroll-y="onScroll")    
+    NuxtLink(to="/")
+        div.flex
+            Icon(name="material-symbols:dashboard" color="black").mr-3.mt-2
+            h1.text-semibold.text-xl.text-black.mt-2 Dashboard
+    ul
+        li.py-5.text-2xl.text-semibold                      
+            div.flex
+                Icon(name="clarity:bullet-list-line" color="black").mr-3.mt-2
+                span layout
+                Icon(name="material-symbols:arrow-drop-down" color="black").mt-2.ml-3
+        li.py-5.text-2xl.text-semibold 
+            NuxtLink(to="/user/all-user")
+                div.flex
+                Icon(name="gravity-ui:persons" color="black").mr-3
+                span Users 
+        li.py-5.text-2xl.text-semibold  
+            div.flex
+                Icon(name="flowbite:annotation-solid" color="black").mt-1.mr-3
+                span Reviews
+        li.py-5.text-2xl.text-semibold  
+            div.flex
+                Icon(name="bxs:brightness" color="black").mt-1.mr-3
+                span Setting 
 </template>
     
     <script setup>
@@ -43,4 +55,3 @@ side(class="w- h-screen px-10 py-2")
     
     <style lang="scss" scoped>
     </style>
-    

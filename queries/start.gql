@@ -32,3 +32,23 @@ query getUsersBoard($filter: UsersBoardFilter!, $paginate: PaginatorInput, $sort
       message
     }
     }
+
+    
+mutation createUserBoard($input: CreateUserBoardInput!) {
+  createUserBoard(input: $input) {
+    data {
+      id
+      firstName
+      arLastName
+      country{
+        isoCode
+      }
+      gender
+      phone
+      age
+    }     
+    code
+    success
+    message
+  }
+}

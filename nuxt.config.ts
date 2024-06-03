@@ -8,13 +8,7 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '@davestewart/nuxt-scrollbar'
   ],
-  nuxtIcon: {
-    size: '24px', 
-    class: 'icon',
-    aliases: {
-      'nuxt': 'logos:nuxt-icon',
-    }
-  },
+
   colorMode: {
     classSuffix: ''
   },
@@ -23,13 +17,13 @@ export default defineNuxtConfig({
       GQL_HOST: 'https://staging-api.tatmeen.sa/graphql' // overwritten by process.env.GQL_HOST
     }
   },
+  pages:true,
   tailwindcss: {
 
     configPath: '~/tailwind.config.js',
 
     cssPath: '~/assets/css/tailwind.css'
 
-  },
-    plugins: ['~/plugins/modal.js']
+  }
 
 })

@@ -1,6 +1,6 @@
 <template lang="pug">
 .min-h-screen.bg-gray-100.py-6.flex.flex-col.justify-center(class="sm:py-12")
-  Form.relative.py-3(class="relative py-3 sm:max-w-xl sm:mx-auto " @submit="onSubmit")
+Form.relative.py-3(class="relative py-3 sm:max-w-xl sm:mx-auto " @submit="onSubmit")
     .absolute.inset-0.bg-gradient-to-r.from-yellow-600.to-yellow-700.shadow-lg.transform.-skew-y-6("sm:skew-y-0.sm:-rotate-6.sm:rounded-3xl")
     .relative.px-4.py-10.bg-white.shadow-lg(class="sm:rounded-3xl.sm:p-20")
       .max-w-md.mx-auto
@@ -90,6 +90,7 @@ const onSubmit = handleSubmit(async (values) => {
     localStorage.setItem('token', token);
     alert(JSON.stringify(values, null, 2));
     console.log(token);
+    router.push({ name: '/' });
   } catch (error) {
     console.error('Error logging in:', error);
     alert('Login failed. Please try again.');

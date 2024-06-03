@@ -1,11 +1,10 @@
-<template lang="pug"> 
-content 
-    div
-        
+<template lang="pug">
+NuxtPage 
 
 </template>
 
 <script setup>
+
 
 </script>
 
