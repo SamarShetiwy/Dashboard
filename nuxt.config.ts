@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '@davestewart/nuxt-scrollbar'
   ],
-
+  
   colorMode: {
     classSuffix: ''
   },
@@ -24,6 +24,5 @@ export default defineNuxtConfig({
 
     cssPath: '~/assets/css/tailwind.css'
 
-  }
-
+  },
 })

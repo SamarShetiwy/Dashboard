@@ -4,7 +4,7 @@ div.flex.items-center.justify-center.py-4.mb-5
 NuxtScrollbar(tag="aside" @ps-scroll-y="onScroll")    
     NuxtLink(to="/")
         div.flex
-            Icon(name="material-symbols:dashboard" color="black").mr-3.mt-2
+            Icon(name="material-symbols:dashboard"  size="24px"  color="black").mr-3.mt-2
             h1.text-semibold.text-xl.text-black.mt-2 Dashboard
     ul
         li.py-5.text-2xl.text-semibold                      

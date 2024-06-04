@@ -1,10 +1,10 @@
-<template lang="pug">
-slot 
+<template>
+    <div>
 
+    </div>
 </template>
 
 <script setup>
-
 
 </script>
 

@@ -1,7 +1,5 @@
 <template lang="pug"> 
-content 
-    div
-        
+div samar
 
 </template>
 
