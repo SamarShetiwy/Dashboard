@@ -1,13 +1,13 @@
 <template lang="pug">
 div
-userAdd
-    
+userUpdate
+        
 </template>
-    
+        
 <script setup>
-    
+        
 </script>
-    
+        
 <style lang="scss" scoped>
-    
+        
 </style>

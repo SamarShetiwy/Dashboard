@@ -28,7 +28,7 @@ div.shadow-xl.mt-5.bg-gray-200.rounded-xl
                                 td.px-6.py-4 {{ user.gender }}
                                 td.px-6.py-4 {{ user.city }} 
                                     div.flex.gap-x-2
-                                        Nuxt_link(to="update/$`{user.id}`")
+                                        Nuxt_link(to="update")
                                             button.px-4.py-2.text-semibold.bg-white.rounded-full update
                                         Nuxt_link(to="#")
                                             button.px-4.py-2.text-semibold.bg-white.rounded-full delete 

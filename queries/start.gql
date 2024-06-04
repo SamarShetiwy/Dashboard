@@ -34,43 +34,19 @@ query getUsersBoard($filter: UsersBoardFilter!, $paginate: PaginatorInput, $sort
     }
     }
 
-query countries{
-  countries{
-    data{
-      id
-      enName
-    }
-  }
-}
+# query countries{
+#   countries{
+#     data{
+#       id
+#       enName
+#     }
+#   }
+# }
 
 
     
 mutation createUserBoard($input: CreateUserBoardInput!) {
   createUserBoard(input: $input) {
-    data {
-      id
-      firstName
-      lastName
-      email
-      birthDate
-      nationality{
-        id
-      }
-      gender{
-        MALE
-        FEMALE
-        NOANSWER
-      }
-      phone
-    }     
-    code
-    success
-    message
-  }
-}
-
-mutation updateUserBoard($input: UpdateUserBoardInput!) {
-  updateUserBoard(input: $input) {
     data {
       id
       firstName
@@ -88,4 +64,23 @@ mutation updateUserBoard($input: UpdateUserBoardInput!) {
     message
   }
 }
+
+# mutation updateUserBoard($input: UpdateUserBoardInput!) {
+#   updateUserBoard(input: $input) {
+#     data {
+#       id
+#       firstName
+#       arLastName
+#       enLastName
+#       email
+#       birthDate
+#       nationality
+#       gender
+#       phone
+#     }     
+#     code
+#     success
+#     message
+#   }
+# }
 
