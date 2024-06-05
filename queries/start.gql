@@ -34,14 +34,16 @@ query getUsersBoard($filter: UsersBoardFilter!, $paginate: PaginatorInput, $sort
     }
     }
 
-# query countries{
-#   countries{
-#     data{
-#       id
-#       enName
-#     }
-#   }
-# }
+
+
+query countries{
+  countries{
+    data{
+      id
+      enName
+    }
+  }
+}
 
 
     
@@ -53,7 +55,7 @@ mutation createUserBoard($input: CreateUserBoardInput!) {
       enLastName
       email
       birthDate
-      nationality{
+      country{
         id
       }
       gender
@@ -65,18 +67,21 @@ mutation createUserBoard($input: CreateUserBoardInput!) {
   }
 }
 
+
 # mutation updateUserBoard($input: UpdateUserBoardInput!) {
 #   updateUserBoard(input: $input) {
 #     data {
 #       id
 #       firstName
-#       arLastName
 #       enLastName
-#       email
-#       birthDate
-#       nationality
 #       gender
+#       birthDate
+#       age
+#       country{
+#         id
+#       }
 #       phone
+#       email
 #     }     
 #     code
 #     success

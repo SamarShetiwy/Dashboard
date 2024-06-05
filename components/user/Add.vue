@@ -17,11 +17,11 @@ div.container.mx-auto.p-4.pt-8.ml-7.shadow-xl.mt-7.bg-gray-200.rounded-xl
             label(for="birthDate").text-gray-700.block.p-2 BirthDate
             input(id="birthDate" v-model="birthDate" v-bind="birthDateProps" type="text" class=" border mt-1 block w-full p-1 rounded-full")
             div.text-red-500.text-sm.mt-1(v-if="errors.birthDate") {{ errors.birthDate }}
-        //- div.mb-4
-        //-     label(for="nationalityId").text-gray-700.block.p-2 Nationality
-        //-     select(id="nationalityId"  v-model="nationalityId" v-bind="nationalityIdProps" class="border mt-1 block w-full p-1 rounded-full")
-        //-         option(v-for="(country, index) in countries" :key="index" :value="country.id") {{ country.enName }}
-        //-     div.text-red-500.text-sm.mt-1(v-if="errors.nationalityId") {{ errors.nationalityId }}
+        div.mb-4
+            label(for="nationalityId").text-gray-700.block.p-2 Nationality
+            select(id="nationalityId"  v-model="nationalityId" v-bind="nationalityIdProps" class="border mt-1 block w-full p-1 rounded-full")
+                option(v-for="(country, index) in countries" :key="index" :value="country.id") {{ country.enName }}
+            div.text-red-500.text-sm.mt-1(v-if="errors.nationalityId") {{ errors.nationalityId }}
         div.mb-4
             label(for="gender").text-gray-700.block.p-2 Gender
             select(id="gender" v-model="gender"  v-bind="genderProps" class=" border mt-1 block w-full p-1 rounded-full")
@@ -82,7 +82,7 @@ const [ phone, phoneProps]= defineField('phone');
 // const fetchCountries = async () => {
 //   const { data, error } = await useAsyncGql({
 //     operation: 'countries',
-//     variables: { id: 'some-id' }
+//     variables: { id: 'id' }
 //   });
 //   if (error) {
 //     console.error("Error:", error);

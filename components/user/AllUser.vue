@@ -22,22 +22,34 @@ div.shadow-xl.mt-5.bg-gray-200.rounded-xl
                             tr.border-b.border-gray-100(v-for="user in users" :key="user.id")
                                 td.px-6.py-4 {{ user.firstName }}
                                 td.px-6.py-4 {{ user.nickname }}
-                                td.px-6.py-4 {{ user.birthDate }}
+                                td.px-6.py-4 {{ formatDate(user.birthDate) }}
                                 td.px-6.py-4 {{ user.email }}
                                 td.px-6.py-4 {{ user.age }}
                                 td.px-6.py-4 {{ user.gender }}
                                 td.px-6.py-4 {{ user.city }} 
                                     div.flex.gap-x-2
-                                        Nuxt_link(to="update")
-                                            button.px-4.py-2.text-semibold.bg-white.rounded-full update
+                                        button( @click="showPopup" ).px-4.py-2.text-semibold.bg-white.rounded-full update
                                         Nuxt_link(to="#")
-                                            button.px-4.py-2.text-semibold.bg-white.rounded-full delete 
+                                            button.px-4.py-2.text-semibold.bg-white.rounded-full delete
+                                        Popup(:show="isPopupVisible" @update:show="isPopupVisible = $event")
+                                            userUpdate
+                                        
 </template>
 
 <script setup>
+
+
 const route= useRoute();
 const users = ref([]);
 
+const formatDate = (date) => {
+  return useDateFormat(date)
+}
+
+const isPopupVisible = ref(false);
+const showPopup = () => {
+  isPopupVisible.value = true;
+}
 
 
 const getAllUsers  = async () => {

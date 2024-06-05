@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-userAdd
+    userAdd
     
 </template>
     
