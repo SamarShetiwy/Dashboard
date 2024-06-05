@@ -1,12 +1,14 @@
 <template lang="pug">
-div(v-if="show" class="popup" ).flex.justify-center
-  div.popup-content(class="flex items-center position-relative")
-      slot
-      Icon(name="ri:close-circle-line"  size="30px"  color="red" class="position-absolute closePopup top-0")
-  //- .popup-bg(@click="closePopup")
-  //- .popup-content
-  //-   .title 
-  //-     h1 hgjhkl
+div(v-if="show" class="popup" @click="closePopup"  )
+  div.popup-content(class=" items-center w-[50%] mt-80")
+    .header
+      .flex.justify-between.align-center.m-5
+        div
+        Icon(name="ri:close-circle-line" @click="closePopup" size="30px"  color="red" class=" icon")
+        
+    
+    slot
+
 
 </template>
 
@@ -30,7 +32,7 @@ const closePopup = () => {
 <style lang="scss" scoped>
 
 .popup {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -38,12 +40,15 @@ const closePopup = () => {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
   
-   &.popup-content {
-    width: 50%; 
-    max-width: 600px;    
-    background: white;
-    border-radius: 8px;
+    &-content {
+    align-items: center;
+    width: 50%;
+    margin: auto;
+    background: black;
+    z-index: 1000;
+  
   }
 
   }
