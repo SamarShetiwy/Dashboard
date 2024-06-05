@@ -77,7 +77,7 @@ const [ nationalityId,nationalityIdProps] = defineField('nationalityId');
 const [ gender,genderProps] = defineField('gender');
 const [ phone, phoneProps]= defineField('phone');
 
-// const countries = ref([]);
+const countries = ref([]);
 
 // const fetchCountries = async () => {
 //   const { data, error } = await useAsyncGql({

@@ -1,13 +1,18 @@
 <template lang="pug">
-div(v-if="show" class="popup" )
-    div.popup-content(class="flex items-center position-relative")
-        slot
-        Icon(name="ri:close-circle-line"  size="30px"  color="red" class="position-absolute closePopup top-0")
+div(v-if="show" class="popup" ).flex.justify-center
+  div.popup-content(class="flex items-center position-relative")
+      slot
+      Icon(name="ri:close-circle-line"  size="30px"  color="red" class="position-absolute closePopup top-0")
+  //- .popup-bg(@click="closePopup")
+  //- .popup-content
+  //-   .title 
+  //-     h1 hgjhkl
 
 </template>
 
 <script setup>
-   const props = defineProps({
+
+  const props = defineProps({
   show: {
     type: Boolean,
     default: false
@@ -21,6 +26,7 @@ const closePopup = () => {
 }
 </script>
 
+
 <style lang="scss" scoped>
 
 .popup {
@@ -33,7 +39,7 @@ const closePopup = () => {
   justify-content: center;
   align-items: center;
   
-  .popup-content {
+   &.popup-content {
     width: 50%; 
     max-width: 600px;    
     background: white;
@@ -41,6 +47,7 @@ const closePopup = () => {
   }
 
   }
+
 
 
 

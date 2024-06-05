@@ -28,11 +28,13 @@ div.shadow-xl.mt-5.bg-gray-200.rounded-xl
                                 td.px-6.py-4 {{ user.gender }}
                                 td.px-6.py-4 {{ user.city }} 
                                     div.flex.gap-x-2
-                                        button( @click="showPopup" ).px-4.py-2.text-semibold.bg-white.rounded-full update
+                                        button( @click="showPopup(user)" ).px-4.py-2.text-semibold.bg-white.rounded-full update
                                         Nuxt_link(to="#")
                                             button.px-4.py-2.text-semibold.bg-white.rounded-full delete
-                                        Popup(:show="isPopupVisible" @update:show="isPopupVisible = $event")
-                                            userUpdate
+    
+    
+    Popup(:show="isPopupVisible" @update:show="isPopupVisible = $event")
+      userUpdate(:data="singleUser")
                                         
 </template>
 
@@ -47,8 +49,10 @@ const formatDate = (date) => {
 }
 
 const isPopupVisible = ref(false);
-const showPopup = () => {
+const singleUser = ref();
+const showPopup = (user) => {
   isPopupVisible.value = true;
+  singleUser.value = user;
 }
 
 
