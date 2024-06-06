@@ -1,32 +1,32 @@
 <template lang="pug">
-div.shadow-xl.mt-5.bg-gray-200.rounded-xl
+div.shadow-xl.mt-5.bg-gray-200.rounded-xl.container
     div.flex.justify-between.gap-5
-        h1.text-2xl.text-semibold.p-5.ml-5  User-{{  }}
+        h1.text-2xl.font-semibold.p-5.ml-5  User-{{  }}
         Nuxt_link(to="add")
             button.px-7.py-3.rounded-full.m-5.bg-white Add User
     div.flex.flex-col.ml-10
         div.over-flow
-            div.inline-block
-                div.over-flow-hidden
-                    table.text-left.text-sm.mt-4
+            div
+                div
+                    table.text-left.text-sm.mt-4.h-screen.w-full.min-w-max.over-flow-hidden.lg-overflow-x-auto
                         thead.border-b.border-gray-100 
                             tr
-                                th.py-4.py-4 FirstName
-                                th.px-6.py-4 NickName
-                                th.px-6.py-4  BirthDate
-                                th.px-6.py-4 Email
-                                th.px-6.py-4 Age
-                                th.px-6.py-4 Gender
-                                th.px-6.py-4 Action 
+                                th.position-sticky.top-0.px-4.py-4 FirstName
+                                th.position-sticky.top-0.px-6.py-4 NickName
+                                th.position-sticky.top-0.px-6.py-4  BirthDate
+                                th.position-sticky.top-0.px-6.py-4 Email
+                                th.position-sticky.top-0.px-6.py-4 Age
+                                th.position-sticky.top-0.px-6.py-4 Gender
+                                th.position-sticky.top-0.px-6.py-4 Action 
                         tbody
                             tr.border-b.border-gray-100(v-for="user in users" :key="user.id")
-                                td.px-6.py-4 {{ user.firstName }}
-                                td.px-6.py-4 {{ user.nickname }}
-                                td.px-6.py-4 {{ formatDate(user.birthDate) }}
-                                td.px-6.py-4 {{ user.email }}
-                                td.px-6.py-4 {{ user.age }}
-                                td.px-6.py-4 {{ user.gender }}
-                                td.px-6.py-4 {{ user.city }} 
+                                td.px-6.py-4 {{ user?.firstName }}
+                                td.px-6.py-4 {{ user?.nickname }}
+                                td.px-6.py-4 {{ formatDate(user?.birthDate) }}
+                                td.px-6.py-4 {{ user?.email }}
+                                td.px-6.py-4 {{ user?.age }}
+                                td.px-6.py-4 {{ user?.gender }}
+                                td.px-6.py-4 {{ user?.city }} 
                                     div.flex.gap-x-2
                                         button( @click="showPopup(user)" ).px-4.py-2.text-semibold.bg-white.rounded-full update
                                         Nuxt_link(to="#")
@@ -80,5 +80,12 @@ getAllUsers();
 </script>
 
 <style lang="scss" scoped>
+.overflow-x-auto {
+    overflow-x: auto;
+}
 
+.sticky {
+    position: sticky;
+    top: 0;
+}
 </style>

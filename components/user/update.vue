@@ -1,5 +1,5 @@
 <template lang="pug">
-div.p-4.pt-8.ml-7.shadow-xl.mt-7.bg-gray-200.rounded-xl.w-50
+div.p-4.pt-10.shadow-xl.bg-gray-300.rounded-xl.w-50
             pre {{ errors }}
             form(@submit.prevent="onSubmit")
                 div.mb-4
@@ -39,7 +39,7 @@ div.p-4.pt-8.ml-7.shadow-xl.mt-7.bg-gray-200.rounded-xl.w-50
         }
     })
 
-    console.log('>>>>>>>>>>>>>>.', props.data)
+console.log('>>>>>>>>>>>>>>.', props.data)
   const updateUser = reactive({
     firstName:  props.data?.firstName,
     lastName: props.data?.lastName,

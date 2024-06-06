@@ -1,5 +1,5 @@
 <template lang="pug">
-container.flex.bg-gray-300
+container.flex.bg-gray-300.w-100
             aside(class="w- h-screen px-10 py-2")
                 Sidebar
             div(class="w-3/4")

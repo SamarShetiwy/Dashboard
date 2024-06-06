@@ -1,15 +1,11 @@
 <template lang="pug">
-div(v-if="show" class="popup" @click="closePopup"  )
-  div.popup-content(class=" items-center w-[50%] mt-80")
+div(v-if="show" class="popup" @click.self="closePopup" class= "flex justify-center items-center")
+  div.popup-content(class=" items-center h-screen")
     .header
-      .flex.justify-between.align-center.m-5
+      .flex.justify-between.align-center
         div
-        Icon(name="ri:close-circle-line" @click="closePopup" size="30px"  color="red" class=" icon")
-        
-    
+        Icon(name="ri:close-circle-line" @click="closePopup" size="30px"  color="red" class=" icon mt-2 ")
     slot
-
-
 </template>
 
 <script setup>
@@ -45,9 +41,11 @@ const closePopup = () => {
     &-content {
     align-items: center;
     width: 50%;
-    margin: auto;
-    background: black;
+    margin-top:10rem ;
+    background: transparent;
     z-index: 1000;
+    border-radius: 10px;
+
   
   }
 
