@@ -20,7 +20,7 @@ div.container.mx-auto.p-4.pt-8.ml-7.shadow-xl.mt-7.bg-gray-200.rounded-xl
         div.mb-4
             label(for="nationalityId").text-gray-700.block.p-2 Nationality
             select(id="nationalityId"  v-model="nationalityId" v-bind="nationalityIdProps" class="border mt-1 block w-full p-1 rounded-full")
-                option(v-for="(country, index) in countries" :key="index" :value="country.id") {{ country.enName }}
+                option(v-for="(country, index) in countries" :key="index" :value="Egypt") {{ country.enName }}
             div.text-red-500.text-sm.mt-1(v-if="errors.nationalityId") {{ errors.nationalityId }}
         div.mb-4
             label(for="gender").text-gray-700.block.p-2 Gender
@@ -80,17 +80,18 @@ const [ phone, phoneProps]= defineField('phone');
 const countries = ref([]);
 
 // const fetchCountries = async () => {
-//   const { data, error } = await useAsyncGql({
-//     operation: 'countries',
-//     variables: { id: 'id' }
-//   });
-//   if (error) {
-//     console.error("Error:", error);
-//   } else if (data && data.countries) {
-//     countries.value = data.countries.data;
-//   } else {
-//     console.error("No data returned");
-//   }
+  const { data } = await useAsyncGql({
+    operation: 'countries',
+    
+  });
+  console.log(countires);
+  if (error) {
+    console.error("Error:", error);
+  } else if (data && data.countries) {
+    countries.value = data.countries.data;
+  } else {
+    console.error("No data returned");
+  }
 // };
 
 

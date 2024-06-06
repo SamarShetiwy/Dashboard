@@ -17,6 +17,7 @@ query getUsersBoard($filter: UsersBoardFilter!, $paginate: PaginatorInput, $sort
     usersBoard(filter: $filter, paginate: $paginate, sortBy: $sortBy) {
     data{
         items{
+          id
           firstName
           nickname
           birthDate
@@ -37,7 +38,7 @@ query getUsersBoard($filter: UsersBoardFilter!, $paginate: PaginatorInput, $sort
 
 
 query countries{
-  countries{
+  countries(enableCities:true){
     data{
       id
       enName
@@ -55,7 +56,7 @@ mutation createUserBoard($input: CreateUserBoardInput!) {
       enLastName
       email
       birthDate
-      country{
+      nationalityId{
         id
       }
       gender

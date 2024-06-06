@@ -1,10 +1,10 @@
 <template lang="pug">
-div(v-if="show" class="popup" @click.self="closePopup" class= "flex justify-center items-center")
+div(v-if="show" class="popup" @click.self="closePopup" class= "flex justify-center items-center mb-0")
   div.popup-content(class=" items-center h-screen")
     .header
       .flex.justify-between.align-center
         div
-        Icon(name="ri:close-circle-line" @click="closePopup" size="30px"  color="red" class=" icon mt-2 ")
+        Icon(name="ri:close-circle-line" @click="closePopup" size="30px"  color="red" class=" icon ")
     slot
 </template>
 

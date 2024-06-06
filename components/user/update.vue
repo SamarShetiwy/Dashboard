@@ -28,7 +28,7 @@ div.p-4.pt-10.shadow-xl.bg-gray-300.rounded-xl.w-50
                     label(for="phone").text-gray-700.block.p-2 Phone
                     input(id="phone"  v-model="updateUser.phone"  type="text" class="border mt-1 block w-full p-1 rounded-full")
                 div.mb-4.flex.gap-5.mt-10.justify-end.pr-5
-                    button(type="submit" class="px-5 py-2 text-semibold bg-white rounded-full") Add
+                    button(type="submit" class="px-5 py-2 text-semibold bg-white rounded-full") Update
                     button(type="button" @click="cancel" class="px-4 py-2 text-semibold bg-white rounded-full") Cancel 
 </template>
     
@@ -42,11 +42,24 @@ div.p-4.pt-10.shadow-xl.bg-gray-300.rounded-xl.w-50
 console.log('>>>>>>>>>>>>>>.', props.data)
   const updateUser = reactive({
     firstName:  props.data?.firstName,
-    lastName: props.data?.lastName,
+    lastName: props.data?.nickname,
     email: props.data?.email,
     birthDate: props.data?.birthDate,
     nationalityId: props.data?.nationalityId,
     gender: props.data?.gender,
     phone: props.data?.phone,
 });
+
+
+const onSubmit = async (event) => {
+    event.preventDefault();
+    try {
+        const result = await updateUser(updateUser);
+        console.log('User added:', result);
+        resetForm();
+    } catch (error) {
+        console.error('Error adding user:', error);
+    }
+};
+
 </script>
