@@ -15,10 +15,9 @@ div.p-4.pt-10.shadow-xl.bg-gray-300.rounded-xl.w-50
                     label(for="birthDate").text-gray-700.block.p-2 BirthDate
                     input(id="birthDate" v-model="updateUser.birthDate" type="text" class=" border mt-1 block w-full p-1 rounded-full")
                 div.mb-4
-                    label(for="nationalityId").text-gray-700.block.p-2 Nationality
-                    select(id="nationalityId"  v-model="updateUser.nationalityId"  class="border mt-1 block w-full p-1 rounded-full")
-                        option(v-for="(country, index) in countries" :key="index" :value="country.id") {{ country?.enName }}
-                div.mb-4
+                    label(for="nationality").text-gray-700.block.p-2 Nationality
+                    select(id="nationality"  v-model="updateUser.nationality"  class="border mt-1 block w-full p-1 rounded-full")
+                        option(v-for="country in  countries?.countries?.data" :value="country.enName" :key="country.id" v-if="country.enName === updateUser.nationality") {{ country.enName }}
                     label(for="gender").text-gray-700.block.p-2 Gender
                     select(id="gender" v-model="updateUser.gender"  class=" border mt-1 block w-full p-1 rounded-full")
                         option(value="MALE") Male
@@ -39,13 +38,19 @@ div.p-4.pt-10.shadow-xl.bg-gray-300.rounded-xl.w-50
         }
     })
 
+    
+const {data:countries, error} = await useAsyncGql('countries', {
+    enableCities: true
+});
+
 console.log('>>>>>>>>>>>>>>.', props.data)
-  const updateUser = reactive({
+
+const updateUser = reactive({
     firstName:  props.data?.firstName,
     lastName: props.data?.nickname,
     email: props.data?.email,
     birthDate: props.data?.birthDate,
-    nationalityId: props.data?.nationalityId,
+    nationality: props.data?.nationality,
     gender: props.data?.gender,
     phone: props.data?.phone,
 });

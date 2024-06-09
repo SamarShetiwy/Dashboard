@@ -21,10 +21,8 @@ div.container.mx-auto.p-4.pt-8.ml-7.shadow-xl.mt-7.bg-gray-200.rounded-xl
         div.mb-4
             label(for="nationality").text-gray-700.block.p-2 Nationality
             //- pre {{ countries?.countries?.data }}
-            select(id="nationality"  v-model="nationality" v-bind="nationalityProps" class="border mt-1 block w-full p-1 rounded-full")
-                
+            select(id="nationality"  v-model="nationality" v-bind="nationalityProps" class="border mt-1 block w-full p-1 rounded-full") 
                 option(v-for="country in  countries?.countries?.data"  :value="country.id" :key="country.id") {{ country.enName }}
-        
             div.text-red-500.text-sm.mt-1(v-if="errors.nationality") {{ errors.nationality}}
         div.mb-4
             label(for="gender").text-gray-700.block.p-2 Gender
@@ -54,9 +52,9 @@ validationSchema: yup.object({
         lastName: yup.string().required(),
         email: yup.string().required(),
         birthDate: yup.string().required(),
-        nationality: yup.string(),
+        nationality: yup.string().required(),
         gender: yup.string().required(),
-        phone: yup.string().min(6).required(),
+        phone: yup.string().required(),
 
 
 }),
@@ -73,34 +71,11 @@ const [ nationality,nationalityProps] = defineField('nationality');
 const [ gender,genderProps] = defineField('gender');
 const [ phone, phoneProps]= defineField('phone');
 
-// const countries = ref([]);
+
 const {data:countries, error} = await useAsyncGql('countries', {
     enableCities: true
 });
-console.log('>>>>>>>>>>>>>>coun', countries.value?.countries?.data );
-
-// const fetchCountries = async () => {
-//   const { data ,error } = await useAsyncGql({
-//     operation: 'countries',
-//     variables : {
-//         enableCities: true
-//     }
-    
-//   });
-
-  
-//   if (data && data.countries) {
-//     countries.value = data.countries.data;
-//     console.log( countries.value, "countries");
-//   } else {
-//     console.error("No data returned" ,error.value);
-//   }
-// };
-// onMounted(() => {
-//       fetchCountries();
-//     });
-
-
+// console.log('>>>>>>>>>>>>>>coun', countries.value?.countries?.data );
 
 const addUser = async (values) => {
     const { data } = await useAsyncGql({
@@ -133,9 +108,15 @@ try {
 } catch (error) {
     console.error('Error adding user:', error);
 }
+
 });
 
 
+const router = useRouter();
+
+const cancel = () => {
+    router.push("/");
+};
 
 </script>
 

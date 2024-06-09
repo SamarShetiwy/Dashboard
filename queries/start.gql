@@ -71,24 +71,25 @@ mutation createUserBoard($input: CreateUserBoardInput!) {
 }
 
 
-# mutation updateUserBoard($input: UpdateUserBoardInput!) {
-#   updateUserBoard(input: $input) {
-#     data {
-#       id
-#       firstName
-#       enLastName
-#       gender
-#       birthDate
-#       age
-#       country{
-#         id
-#       }
-#       phone
-#       email
-#     }     
-#     code
-#     success
-#     message
-#   }
-# }
+mutation updateUserBoard($input: UpdateUserBoardInput!) {
+  updateUserBoard(input: $input) {
+    data {
+      id
+      firstName
+      enLastName
+      gender
+      birthDate
+      age
+      nationality{
+        id
+        enName
+      }
+      phone
+      email
+    }     
+    code
+    success
+    message
+  }
+}
 
