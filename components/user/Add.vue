@@ -17,11 +17,15 @@ div.container.mx-auto.p-4.pt-8.ml-7.shadow-xl.mt-7.bg-gray-200.rounded-xl
             label(for="birthDate").text-gray-700.block.p-2 BirthDate
             input(id="birthDate" v-model="birthDate" v-bind="birthDateProps" type="text" class=" border mt-1 block w-full p-1 rounded-full")
             div.text-red-500.text-sm.mt-1(v-if="errors.birthDate") {{ errors.birthDate }}
+
         div.mb-4
-            label(for="nationalityId").text-gray-700.block.p-2 Nationality
-            select(id="nationalityId"  v-model="nationalityId" v-bind="nationalityIdProps" class="border mt-1 block w-full p-1 rounded-full")
-                option(v-for="(country, index) in countries" :key="index" :value="Egypt") {{ country.enName }}
-            div.text-red-500.text-sm.mt-1(v-if="errors.nationalityId") {{ errors.nationalityId }}
+            label(for="nationality").text-gray-700.block.p-2 Nationality
+            //- pre {{ countries?.countries?.data }}
+            select(id="nationality"  v-model="nationality" v-bind="nationalityProps" class="border mt-1 block w-full p-1 rounded-full")
+                
+                option(v-for="country in  countries?.countries?.data"  :value="country.id" :key="country.id") {{ country.enName }}
+        
+            div.text-red-500.text-sm.mt-1(v-if="errors.nationality") {{ errors.nationality}}
         div.mb-4
             label(for="gender").text-gray-700.block.p-2 Gender
             select(id="gender" v-model="gender"  v-bind="genderProps" class=" border mt-1 block w-full p-1 rounded-full")
@@ -37,14 +41,6 @@ div.container.mx-auto.p-4.pt-8.ml-7.shadow-xl.mt-7.bg-gray-200.rounded-xl
             button(type="submit" class="px-5 py-2 text-semibold bg-white rounded-full") Add
             button(type="button" @click="cancel" class="px-4 py-2 text-semibold bg-white rounded-full") Cancel 
 </template>
-<script setup="">
-
-</script>
-
-<style>
-
-</style>
-
 
 <script setup>
 
@@ -73,26 +69,36 @@ const [ firstName,firstNameProps] = defineField('firstName');
 const [ lastName,lastNameProps] = defineField('lastName');
 const [ email,emailProps] = defineField('email');
 const [ birthDate,birthDateProps] = defineField('birthDate');
-const [ nationalityId,nationalityIdProps] = defineField('nationalityId');
+const [ nationality,nationalityProps] = defineField('nationality');
 const [ gender,genderProps] = defineField('gender');
 const [ phone, phoneProps]= defineField('phone');
 
-const countries = ref([]);
+// const countries = ref([]);
+const {data:countries, error} = await useAsyncGql('countries', {
+    enableCities: true
+});
+console.log('>>>>>>>>>>>>>>coun', countries.value?.countries?.data );
 
 // const fetchCountries = async () => {
-  const { data } = await useAsyncGql({
-    operation: 'countries',
+//   const { data ,error } = await useAsyncGql({
+//     operation: 'countries',
+//     variables : {
+//         enableCities: true
+//     }
     
-  });
-  console.log(countires);
-  if (error) {
-    console.error("Error:", error);
-  } else if (data && data.countries) {
-    countries.value = data.countries.data;
-  } else {
-    console.error("No data returned");
-  }
+//   });
+
+  
+//   if (data && data.countries) {
+//     countries.value = data.countries.data;
+//     console.log( countries.value, "countries");
+//   } else {
+//     console.error("No data returned" ,error.value);
+//   }
 // };
+// onMounted(() => {
+//       fetchCountries();
+//     });
 
 
 
@@ -104,17 +110,18 @@ const addUser = async (values) => {
             lastName:values.lastName,
             email:values.email,
             birthDate:values.birthDate,
-            nationalityId:values.nationalityId,
+            nationalityId:values.nationality,
             gender:values.gender,
             phone:values.phone
         } 
         },
 });
-            if (data.value.createUserBoard.success) {
-                return data.value.createUserBoard.data;
-            } else {
-                throw new Error(data.value.createUserBoard.message);
-            }
+
+    if (data.value.createUserBoard.success) {
+        return data.value.createUserBoard.data;
+    } else {
+        throw new Error(data.value.createUserBoard.message);
+        }
 };
 
 const onSubmit = handleSubmit(async (values) => {

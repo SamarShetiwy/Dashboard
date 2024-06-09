@@ -7,8 +7,8 @@ div.shadow-xl.mt-7.bg-gray-200.rounded-xl.container
     div.flex.flex-col.ml-10
         div
             div
-                div
-                    table.text-left.text-sm.mt-4.h-screen.w-full.min-w-max.over-flow-hidden.lg-overflow-x-auto
+                div.overflow-scroll
+                    table.text-left.text-sm.mt-4.h-screen.w-full.min-w-max.over-flow-hidden.lg-overflow-scroll
                         thead.border-b.border-gray-100 
                             tr
                                 th.position-sticky.top-0.px-4.py-4 FirstName
@@ -87,13 +87,10 @@ const deleteUser = (id) => {
 </script>
 
 <style lang="scss" scoped>
-.overflow-x-auto {
-    overflow-x: auto;
-}
 
-.sticky {
-    position: sticky;
-    top: 0;
-}
+// .sticky {
+//     position: sticky;
+//     top: 0;
+// }
 
 </style>

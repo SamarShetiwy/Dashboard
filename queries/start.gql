@@ -36,18 +36,19 @@ query getUsersBoard($filter: UsersBoardFilter!, $paginate: PaginatorInput, $sort
     }
 
 
+query countries ($enableCities: Boolean) {
+        countries(enableCities: $enableCities) {
+          data {
+            id
+            enName
+          }
+          code
+          success
+          message
+        }
+      }
 
-query countries{
-  countries(enableCities:true){
-    data{
-      id
-      enName
-    }
-  }
-}
 
-
-    
 mutation createUserBoard($input: CreateUserBoardInput!) {
   createUserBoard(input: $input) {
     data {
@@ -56,8 +57,9 @@ mutation createUserBoard($input: CreateUserBoardInput!) {
       enLastName
       email
       birthDate
-      nationalityId{
+      nationality{
         id
+        enName
       }
       gender
       phone

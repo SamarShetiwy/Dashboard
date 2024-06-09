@@ -8,6 +8,9 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '@davestewart/nuxt-scrollbar'
   ],
+  buildModules: [
+    '@pinia/nuxt',
+  ],
   
   colorMode: {
     classSuffix: ''
@@ -25,4 +28,7 @@ export default defineNuxtConfig({
     cssPath: '~/assets/css/tailwind.css'
 
   },
+  router: {
+    middleware: ['auth']
+  }
 })

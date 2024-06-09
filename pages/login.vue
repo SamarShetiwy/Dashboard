@@ -1,8 +1,8 @@
 <template lang="pug">
-.min-h-screen.bg-gray-100.py-6.flex.flex-col.justify-center(class="sm:py-12")
-Form.relative.py-3(class="relative py-3 sm:max-w-xl sm:mx-auto " @submit="onSubmit")
-    .absolute.inset-0.bg-gradient-to-r.from-light-600.to-light-700.shadow-lg.transform.-skew-y-6("sm:skew-y-0.sm:-rotate-6.sm:rounded-3xl")
-    .relative.px-4.py-10.bg-white.shadow-lg(class="sm:rounded-3xl.sm:p-20")
+//- .py-6.flex.flex-col.justify-center(class="sm:py-12")
+Form.relative.mt-20.px-6.py-10.flex.flex-col.justify-center(class="sm:py-12")(class="relative py-3 sm:max-w-xl sm:mx-auto " @submit="onSubmit")
+    .absolute.inset-0.bg-gradient-to-r.from-gray-200.to-light-700.shadow-lg.transform.-skew-y-6("sm:skew-y-0.sm:-rotate-6.sm:rounded-3xl")
+    .relative.px-4.py-10.bg-gray.shadow-lg(class="sm:rounded-3xl.sm:p-20")
       .max-w-md.mx-auto
       h1.text-2xl.font-semibold Login
       .divide-y.divide-gray-200
@@ -34,7 +34,7 @@ Form.relative.py-3(class="relative py-3 sm:max-w-xl sm:mx-auto " @submit="onSubm
             label(class="absolute.left-0.-top-3.5.text-gray-600.text-sm.peer-placeholder-shown:text-base.peer-placeholder-shown:text-gray-440.peer-placeholder-shown:top-2.transition-all.peer-focus:-top-3.5.peer-focus:text-gray-600.peer-focus:text-sm(for='password') Password")
             div.text-red-500.text-sm.mt-1(v-if="errors.password") {{ errors.password }}
           .relative
-            button.bg-yellow-700.text-white.rounded-md.px-2.py-1(@click="handleSubmit ") Submit
+            button.bg-gray-700.text-white.rounded-md.px-2.py-1(@click="handleSubmit ") Submit
             div.text-red-400(v-if="errorMessage") {{ errorMessage }}
       .w-full.flex.justify-center
       button(class="flex.items-center.bg-white.border.border-gray-300.rounded-lg.shadow-md.px-6.py-2.text-sm.font-medium.text-gray-800.hover:bg-gray-200.focus:outline-none.focus:ring-2.focus:ring-offset-2.focus:ring-gray-500")
@@ -54,10 +54,16 @@ Form.relative.py-3(class="relative py-3 sm:max-w-xl sm:mx-auto " @submit="onSubm
 import { useForm  } from 'vee-validate';
 import * as yup from 'yup';
 import { ref } from 'vue';
+import { useAuthStore } from '~/stores/auth';
+
+
 const router = useRouter();
 const errorMessage = ref('');
+const authStore = useAuthStore();
+
 definePageMeta({
-  layout : "login"
+  layout:"login" 
+
 })
 const { errors, handleSubmit, defineField } = useForm({
   validationSchema: yup.object({
@@ -71,32 +77,29 @@ const [email, emailAttrs] = defineField('email');
 const [password, passwordAttrs] = defineField('password');
 
 
-const getToken = async (values) => {
-  const { data } = await useAsyncGql({
-    operation: 'EmailAndPasswordLoginBoard',
-    variables: { input: { email: values.email, password: values.password ,device:"DESKTOP"} },
-  });
+// const getToken = async (values) => {
+//   const { data } = await useAsyncGql({
+//     operation: 'EmailAndPasswordLoginBoard',
+//     variables: { input: { email: values.email, password: values.password ,device:"DESKTOP"} },
+//   });
 
-  if (data.value.emailAndPasswordLoginBoard.success) {
-    return data.value.emailAndPasswordLoginBoard.data.token;
-  } else {
-    throw new Error(data.value.emailAndPasswordLoginBoard.message);
-  }
-};
+//   if (data.value.emailAndPasswordLoginBoard.success) {
+//     return data.value.emailAndPasswordLoginBoard.data.token;
+//   } else {
+//     throw new Error(data.value.emailAndPasswordLoginBoard.message);
+//   }
+// };
 
-// It validate all fields and doesn't call your function unless all fields are valid
 const onSubmit = handleSubmit(async (values) => {
   try {
-    const token = await getToken(values);
-    localStorage.setItem('token', token);
-    alert(JSON.stringify(values, null, 2));
-    console.log(token);
-    router.push({ name: '/' });
+    await authStore.login(values.email, values.password);
+    router.push({ name: 'index' });
   } catch (error) {
     console.error('Error logging in:', error);
-    alert('Login failed. Please try again.');
+    errorMessage.value = 'Login failed. Please try again.';
   }
 });
+
 
 </script>
 
