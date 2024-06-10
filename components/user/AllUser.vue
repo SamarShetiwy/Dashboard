@@ -33,7 +33,7 @@ div.shadow-xl.mt-7.bg-gray-200.rounded-xl.container
     
     
     Popup(:show="isPopupVisible" @update:show="isPopupVisible = $event")
-      userUpdate(:data="singleUser")
+      userUpdate(:data="singleUser" @updateSuccessful="handleUpdateSuccessful")
 
 </template>
 
@@ -77,6 +77,11 @@ throw new Error(data.value.usersBoard.message);
 }
 
 }
+
+const handleUpdateSuccessful = () => {
+  getAllUsers();
+};
+
 getAllUsers();
 
 

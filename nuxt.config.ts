@@ -30,5 +30,9 @@ export default defineNuxtConfig({
   },
   router: {
     middleware: ['auth']
-  }
+  },
+  // plugins: [
+  //   '~/plugins/toast.js'
+  // ]
+
 })

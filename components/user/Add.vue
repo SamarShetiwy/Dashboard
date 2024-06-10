@@ -15,7 +15,7 @@ div.container.mx-auto.p-4.pt-8.ml-7.shadow-xl.mt-7.bg-gray-200.rounded-xl
             div.text-red-500.text-sm.mt-1(v-if="errors.email") {{ errors.email }}
         div.mb-4
             label(for="birthDate").text-gray-700.block.p-2 BirthDate
-            input(id="birthDate" v-model="birthDate" v-bind="birthDateProps" type="text" class=" border mt-1 block w-full p-1 rounded-full")
+            DatePicker(id="birthDate" v-model="birthDate" v-bind="birthDateProps" type="text" class=" border mt-1 block w-full p-1 rounded-full")
             div.text-red-500.text-sm.mt-1(v-if="errors.birthDate") {{ errors.birthDate }}
 
         div.mb-4
@@ -37,24 +37,29 @@ div.container.mx-auto.p-4.pt-8.ml-7.shadow-xl.mt-7.bg-gray-200.rounded-xl
             div.text-red-500.text-sm.mt-1(v-if="errors.phone") {{ errors.phone }}                
         div.mb-4.flex.gap-5.mt-10.justify-end.pr-5
             button(type="submit" class="px-5 py-2 text-semibold bg-white rounded-full") Add
-            button(type="button" @click="cancel" class="px-4 py-2 text-semibold bg-white rounded-full") Cancel 
+            button(type="button" @click="cancel()" class="px-4 py-2 text-semibold bg-white rounded-full") Cancel 
 </template>
 
 <script setup>
 
 import { useForm  } from 'vee-validate';
 import * as yup from 'yup';
+import DatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
+
+
+const date = ref(null);
 
 
 const { errors, handleSubmit, defineField,resetForm} = useForm({
 validationSchema: yup.object({
-        firstName: yup.string().required(),
-        lastName: yup.string().required(),
-        email: yup.string().required(),
-        birthDate: yup.string().required(),
+    firstName: yup.string().required().matches(/^[a-zA-Z\s]*$/, 'error ').label('First name').required(),
+        lastName: yup.string().matches(/^[a-zA-Z\s]*$/, 'error').label('last name').required(),
+        email: yup.string().email().required(),
+        birthDate: yup.date().required(),
         nationality: yup.string().required(),
-        gender: yup.string().required(),
-        phone: yup.string().required(),
+        gender: yup.string().matches(/^(MALE|FEMALE)$/, 'error').label('gender name').required(),
+        phone: yup.string().label('phone name').required(),
 
 
 }),
@@ -78,13 +83,14 @@ const {data:countries, error} = await useAsyncGql('countries', {
 // console.log('>>>>>>>>>>>>>>coun', countries.value?.countries?.data );
 
 const addUser = async (values) => {
+    const birthDateTimestamp = new Date(values.birthDate).valueOf();
     const { data } = await useAsyncGql({
         operation: 'createUserBoard',
         variables: { input: {
             firstName:values.firstName,
             lastName:values.lastName,
             email:values.email,
-            birthDate:values.birthDate,
+            birthDate:birthDateTimestamp,
             nationalityId:values.nationality,
             gender:values.gender,
             phone:values.phone
