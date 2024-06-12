@@ -23,7 +23,9 @@
     "pug-plain-loader": "^1.1.0",
     "vee-validate": "^4.12.8",
     "vue": "^3.4.27",
+    "vue-phone-number-input": "^1.12.13",
     "vue-router": "^4.3.2",
+    "vue-tel-input-vuetify": "^1.5.3",
     "yup": "^1.4.0"
   },
   "devDependencies": {

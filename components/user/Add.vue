@@ -110,6 +110,7 @@ try {
     const result = await addUser(values);
     console.log('User added:', result);
     resetForm();
+    emit('addSuccessful');
 
 } catch (error) {
     console.error('Error adding user:', error);
@@ -121,8 +122,9 @@ try {
 const router = useRouter();
 
 const cancel = () => {
-    router.push("/");
+    router.push({ path: "/user/all-user" });
 };
+
 
 </script>
 

@@ -7,7 +7,7 @@ div.p-4.pt-10.shadow-xl.bg-gray-300.rounded-xl.w-50
             div.text-red-500.text-sm.mt-1 {{ firstNameError }} 
         div.mb-4
             label(for="enLastName").text-gray-700.block.p-2 LastName
-            input(id="enLastName" v-model="enLastName"   type="text" class=" border mt-1 block w-full p-1 rounded-full")
+            input(id="enLastName"  v-model="enLastName"   type="text" class=" border mt-1 block w-full p-1 rounded-full")
             div.text-red-500.text-sm.mt-1 {{enLastNameError }} 
         div.mb-4
             label(for="email").text-gray-700.block.p-2 Email
@@ -30,12 +30,12 @@ div.p-4.pt-10.shadow-xl.bg-gray-300.rounded-xl.w-50
             div.text-red-500.text-sm.mt-1 {{ genderError }} 
         div.mb-4
             label(for="phone").text-gray-700.block.p-2 Phone
-            input(id="phone" v-model="phone" type="text" class="border mt-1 block w-full p-1 rounded-full")
+            VueTelInputVuetify(id="phone" v-model="phone" type="text" class="border mt-1 block w-full p-1 rounded-full")
             div.text-red-500.text-sm.mt-1 {{ phoneError }}
 
         div.mb-4.flex.gap-5.mt-10.justify-end.pr-5
             button(type="submit" class="px-5 py-2 text-semibold bg-white rounded-full") Update
-            button(type="button" @click="cancel" class="px-4 py-2 text-semibold bg-white rounded-full") Cancel 
+            button(type="button" @click="cancel"  class="px-4 py-2 text-semibold bg-white rounded-full") Cancel 
 </template>
 
 <script setup>
@@ -45,8 +45,11 @@ import * as yup from 'yup';
 import { defineEmits } from 'vue';
 import DatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
+import VueTelInputVuetify from 'vue-tel-input-vuetify';
+import 'vue-tel-input-vuetify/dist/vue-tel-input-vuetify.css';
 
 const date = ref(null);
+const phoneNumber = ref('');
 const router=useRouter();
 // const toast=useTost();
 // const loading=ref(false)
@@ -161,13 +164,19 @@ const updateUser = async () => {
   }
 };
 
+
+
 const cancel = () => {
-    if(loading.value){
-        router.push("/");
-        // toast.success('تم تحديث البيانات بنجاح')  
-    }else{
-        // toast.error(' يوجد خطا ')   
-    }
+    // if(loading.value){
+    //     router.push({ path: "/user/all-user" });
+    //     toast.success('تم تحديث البيانات بنجاح')  
+    // }else{
+    //     toast.error(' يوجد خطا ')   
+    // }
+    router.push({ path: "/" });
+
+  
+
 };
 
 </script>

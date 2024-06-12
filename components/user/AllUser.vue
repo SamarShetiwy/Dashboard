@@ -34,6 +34,8 @@ div.shadow-xl.mt-7.bg-gray-200.rounded-xl.container
     
     Popup(:show="isPopupVisible" @update:show="isPopupVisible = $event")
       userUpdate(:data="singleUser" @updateSuccessful="handleUpdateSuccessful")
+    userAdd(:data="singleUser" @addSuccessful="handleAddSuccessful")
+
 
 </template>
 
@@ -58,7 +60,7 @@ const showPopup = (user) => {
 const getAllUsers  = async () => {
   const token = localStorage.getItem('token');
   useGqlToken(`Bearer ${token}`)
-  const { data } = await useAsyncGql({
+  const { data } =  useAsyncGql({
     operation: 'getUsersBoard',
     variables: 
     { 
@@ -83,6 +85,14 @@ const handleUpdateSuccessful = () => {
 };
 
 getAllUsers();
+
+const handleAddSuccessful = () => {
+
+getAllUsers();
+
+};
+getAllUsers();
+
 
 
 const deleteUser = (id) => {

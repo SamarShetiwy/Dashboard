@@ -31,8 +31,10 @@ export default defineNuxtConfig({
   router: {
     middleware: ['auth']
   },
-  // plugins: [
-  //   '~/plugins/toast.js'
-  // ]
+  plugins: [
+    // '~/plugins/toast.js',
+    '~/plugins/vue-tel-input.js'
+  
+  ]
 
 })
