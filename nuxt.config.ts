@@ -33,7 +33,7 @@ export default defineNuxtConfig({
   },
   plugins: [
     // '~/plugins/toast.js',
-    '~/plugins/vue-tel-input.js'
+    // '~/plugins/vue-tel-input.js'
   
   ]
 

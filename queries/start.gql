@@ -20,6 +20,7 @@ query getUsersBoard($filter: UsersBoardFilter!, $paginate: PaginatorInput, $sort
           id
           firstName
           nickname
+          enLastName
           birthDate
           age
           gender

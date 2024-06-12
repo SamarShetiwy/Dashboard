@@ -21,20 +21,20 @@ div.shadow-xl.mt-7.bg-gray-200.rounded-xl.container
                         tbody
                             tr.border-b.border-gray-100(v-for="user in users" :key="user.id")
                                 td.px-2.py-4 {{ user?.firstName }}
-                                td.px-2.py-4 {{ user?.nickname }}
+                                td.px-2.py-4 {{ user?.enLastName }}
                                 td.px-2.py-4 {{ formatDate(user?.birthDate) }}
                                 td.px-2.py-4 {{ user?.email }}
                                 td.px-2.py-4 {{ user?.age }}
                                 td.px-2.py-4 {{ user?.gender }}
                                 td.px-2.py-4 {{ user?.city }} 
                                     div.flex.gap-x-2
-                                        button( @click="showPopup(user)" ).px-4.py-2.font-semibold.bg-white.rounded-full Update
+                                        button(:data="singleUser" @addSuccessful="handleAddSuccessful" @click="showPopup(user)" ).px-4.py-2.font-semibold.bg-white.rounded-full Update
                                         button.px-4.py-2.font-semibold.bg-white.rounded-full(@click="deleteUser(user.id)") delete
     
     
     Popup(:show="isPopupVisible" @update:show="isPopupVisible = $event")
       userUpdate(:data="singleUser" @updateSuccessful="handleUpdateSuccessful")
-    userAdd(:data="singleUser" @addSuccessful="handleAddSuccessful")
+
 
 
 </template>
@@ -56,11 +56,21 @@ const showPopup = (user) => {
   singleUser.value = user;
 }
 
-
-const getAllUsers  = async () => {
+// const token = localStorage.getItem('token');
+// useGqlToken(`Bearer ${token}`)
+// const {data:usersData, error} = await useAsyncData('allUsers', gqlGetUsersBoard,{
+//     filter: { role:"USER" },
+//     paginate: { page: 1, limit: 10 },
+//     sortBy: "DATE_JOINED"
+// })
+// users.value = usersData.value.usersBoard.data.items;
+onMounted(async() => {
   const token = localStorage.getItem('token');
   useGqlToken(`Bearer ${token}`)
-  const { data } =  useAsyncGql({
+  await getAllUsers();
+})
+async function getAllUsers() {
+  const { data } = await useAsyncGql({
     operation: 'getUsersBoard',
     variables: 
     { 
@@ -69,14 +79,7 @@ const getAllUsers  = async () => {
       sortBy: "DATE_JOINED"
     }  
   });
-
-
-if (data.value.usersBoard.success){
-    users.value = data.value.usersBoard.data.items;
-    console.log(users.value , "users");
-}else {
-throw new Error(data.value.usersBoard.message);
-}
+  users.value = data.value.usersBoard.data.items;
 
 }
 
@@ -84,14 +87,10 @@ const handleUpdateSuccessful = () => {
   getAllUsers();
 };
 
-getAllUsers();
 
 const handleAddSuccessful = () => {
-
 getAllUsers();
-
 };
-getAllUsers();
 
 
 

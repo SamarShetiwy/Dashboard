@@ -6,9 +6,9 @@ div.p-4.pt-10.shadow-xl.bg-gray-300.rounded-xl.w-50
             input(id="firstName"  v-model="firstName" type="text" class="border mt-1 block w-full p-1 rounded-full")
             div.text-red-500.text-sm.mt-1 {{ firstNameError }} 
         div.mb-4
-            label(for="enLastName").text-gray-700.block.p-2 LastName
-            input(id="enLastName"  v-model="enLastName"   type="text" class=" border mt-1 block w-full p-1 rounded-full")
-            div.text-red-500.text-sm.mt-1 {{enLastNameError }} 
+            label(for="lastName").text-gray-700.block.p-2 LastName
+            input(id="lastName"  v-model="lastName"   type="text" class=" border mt-1 block w-full p-1 rounded-full")
+            div.text-red-500.text-sm.mt-1 {{lastNameError }} 
         div.mb-4
             label(for="email").text-gray-700.block.p-2 Email
             input(id="email" v-model="email"    type="email" class="border mt-1 block w-full p-1 rounded-full")
@@ -30,7 +30,7 @@ div.p-4.pt-10.shadow-xl.bg-gray-300.rounded-xl.w-50
             div.text-red-500.text-sm.mt-1 {{ genderError }} 
         div.mb-4
             label(for="phone").text-gray-700.block.p-2 Phone
-            VueTelInputVuetify(id="phone" v-model="phone" type="text" class="border mt-1 block w-full p-1 rounded-full")
+            input(id="phone" v-model="phone" type="text" class="border mt-1 block w-full p-1 rounded-full")
             div.text-red-500.text-sm.mt-1 {{ phoneError }}
 
         div.mb-4.flex.gap-5.mt-10.justify-end.pr-5
@@ -45,11 +45,11 @@ import * as yup from 'yup';
 import { defineEmits } from 'vue';
 import DatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
-import VueTelInputVuetify from 'vue-tel-input-vuetify';
-import 'vue-tel-input-vuetify/dist/vue-tel-input-vuetify.css';
+// import VueTelInputVuetify from 'vue-tel-input-vuetify';
+// import 'vue-tel-input-vuetify/dist/vue-tel-input-vuetify.css';
 
 const date = ref(null);
-const phoneNumber = ref('');
+// const phone = ref('');
 const router=useRouter();
 // const toast=useTost();
 // const loading=ref(false)
@@ -64,7 +64,7 @@ const props = defineProps({
 const initialValues = {
     userId:'',
     firstName: '',
-    enLastName: '',
+    lastName: '',
     email: '',
     birthDate: '',
     nationality: '',
@@ -72,10 +72,10 @@ const initialValues = {
     phone:''
 }
 
-const { errors, handleSubmit, defineField, resetForm,setFieldValue  } = useForm({
+const { errors, handleSubmit, defineField, resetForm,setFieldValue } = useForm({
     validationSchema: yup.object({
         firstName: yup.string().required().matches(/^[a-zA-Z\s]*$/, 'error ').label('First name').required(),
-        enLastName: yup.string().matches(/^[a-zA-Z\s]*$/, 'error').label('last name').required(),
+        lastName: yup.string().matches(/^[a-zA-Z\s]*$/, 'error').label('last name').required(),
         email: yup.string().email().required(),
         birthDate: yup.date().required(),
         nationality: yup.string().required(),
@@ -85,12 +85,13 @@ const { errors, handleSubmit, defineField, resetForm,setFieldValue  } = useForm(
     initialValues: initialValues
 });
 
+
 watch((errors), (curr) => {
     console.log(curr, "errors")
 })
 
 const { value: firstName, errorMessage: firstNameError } = useField('firstName');
-const { value: enLastName, errorMessage: enLastNameError  } = useField('enLastName');
+const { value: lastName, errorMessage: lastNameError  } = useField('lastName');
 const { value: email, errorMessage: emailError  } = useField('email');
 const { value: birthDate, errorMessage: birthDateError  } = useField('birthDate');
 const { value: nationality, errorMessage: nationalityError  } = useField('nationality');
@@ -104,7 +105,7 @@ console.log('>>>>>>>>>>>>>>.', props.data);
 if (props.data) {
     initialValues.userId= props.data?.id,
     firstName.value = props.data?.firstName;
-    enLastName.value = props.data?.nickname;
+    lastName.value = props.data?.enLastName;
     email.value = props.data?.email;
     birthDate.value = useDateFormat(props.data?.birthDate);
     nationality.value = props.data?.nationality;
@@ -118,7 +119,42 @@ const { data: countries, error } = await useAsyncGql('countries', {
     enableCities: true
 });
 
-const updateUserGraph = async (values) => {
+// const updateUserGraph = async (values) => {
+//     const birthDateTimestamp = new Date(values.birthDate).valueOf();
+//     const { data } = await useAsyncGql({
+//         operation: 'updateUserBoard',
+//         variables: {
+//             input: {
+//                 userId: initialValues.userId,
+//                 firstName: values.firstName,
+//                 lastName: values.nickname,
+//                 email: values.email,
+//                 birthDate: birthDateTimestamp,
+//                 nationalityId: values.nationality,
+//                 gender: values.gender,
+//                 phone: values.phone
+//             }
+//         },
+//     });
+//     if (data.value.updateUserBoard.success) {
+//         return data.value.updateUserBoard.data;
+//     } else {
+//         throw new Error(data.value.updateUserBoard.message);
+//     }
+// };
+
+
+const onSubmit = handleSubmit(async (values) => {
+    // alert(JSON.stringify(values))
+    // try {
+    //     const result = await updateUserGraph(values);
+    //     console.log('User added:', result);
+    //     emit('updateSuccessful');
+    
+    // } catch (error) {
+    //     console.error('Error adding user:', error);
+    // }
+    alert(JSON.stringify(values, null,2))
     const birthDateTimestamp = new Date(values.birthDate).valueOf();
     const { data } = await useAsyncGql({
         operation: 'updateUserBoard',
@@ -126,7 +162,7 @@ const updateUserGraph = async (values) => {
             input: {
                 userId: initialValues.userId,
                 firstName: values.firstName,
-                enLastName: values.enLastName,
+                lastName: values.lastName,
                 email: values.email,
                 birthDate: birthDateTimestamp,
                 nationalityId: values.nationality,
@@ -138,31 +174,21 @@ const updateUserGraph = async (values) => {
     if (data.value.updateUserBoard.success) {
         return data.value.updateUserBoard.data;
     } else {
-        throw new Error(data.value.updateUserBoard.message);
-    }
-};
-
-
-const onSubmit = handleSubmit(async (values) => {
-    alert(JSON.stringify(values))
-    try {
-        const result = await updateUserGraph(values);
-        console.log('User added:', result);
     
-    } catch (error) {
-        console.error('Error adding user:', error);
+        throw new Error(data.value.updateUserBoard.message);
+
     }
 
 });
 
 const emit = defineEmits(['updateSuccessful']);
 
-const updateUser = async () => {
-  const response = await UpdateFunction();
-  if (response.success) {
-    emit('updateSuccessful');
-  }
-};
+// const updateUser = async () => {
+//   const response = await UpdateFunction();
+//   if (response.success) {
+//     emit('updateSuccessful');
+//   }
+// };
 
 
 

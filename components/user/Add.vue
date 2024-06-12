@@ -48,7 +48,7 @@ import DatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 
 
-const date = ref(null);
+const date = ref(new Date);
 
 
 const { errors, handleSubmit, defineField,resetForm} = useForm({
