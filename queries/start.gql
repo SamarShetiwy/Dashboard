@@ -94,3 +94,12 @@ mutation updateUserBoard($input: UpdateUserBoardInput!) {
   }
 }
 
+mutation deleteUserBoard($userId: ID!) {
+  deleteUserBoard(userId: $userId) {
+    data
+    code
+    success
+    message
+  }
+}
+

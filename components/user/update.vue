@@ -34,7 +34,7 @@ div.p-4.pt-10.shadow-xl.bg-gray-300.rounded-xl.w-50
             div.text-red-500.text-sm.mt-1 {{ phoneError }}
 
         div.mb-4.flex.gap-5.mt-10.justify-end.pr-5
-            button(type="submit" class="px-5 py-2 text-semibold bg-white rounded-full") Update
+            button(type="submit"  class="px-5 py-2 text-semibold bg-white rounded-full") Update
             button(type="button" @click="cancel"  class="px-4 py-2 text-semibold bg-white rounded-full") Cancel 
 </template>
 
@@ -47,12 +47,13 @@ import DatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 // import VueTelInputVuetify from 'vue-tel-input-vuetify';
 // import 'vue-tel-input-vuetify/dist/vue-tel-input-vuetify.css';
+import { useToast } from 'vue-toast-notification';
+
 
 const date = ref(null);
 // const phone = ref('');
 const router=useRouter();
-// const toast=useTost();
-// const loading=ref(false)
+
 
 const props = defineProps({
     data: {
@@ -119,6 +120,8 @@ const { data: countries, error } = await useAsyncGql('countries', {
     enableCities: true
 });
 
+
+
 // const updateUserGraph = async (values) => {
 //     const birthDateTimestamp = new Date(values.birthDate).valueOf();
 //     const { data } = await useAsyncGql({
@@ -171,17 +174,27 @@ const onSubmit = handleSubmit(async (values) => {
             }
         },
     });
-    if (data.value.updateUserBoard.success) {
-        return data.value.updateUserBoard.data;
-    } else {
-    
-        throw new Error(data.value.updateUserBoard.message);
 
-    }
+    // const emit = defineEmits(['updateSuccessful']);
+    const toast = useToast();
+    console.log('>>>>>>...',data.value.updateUserBoard?.message)
+    if (data.value.updateUserBoard.success) {
+    toast.success(data.value.updateUserBoard?.message,{
+        duration: 5000,
+        position: 'top-right'
+        });
+      } else {
+    toast.error(data.value.updateUserBoard?.message,{
+        duration: 5000,
+        position: 'top-right'
+  });
+    // emit('updateSuccessful');
+
+}
 
 });
 
-const emit = defineEmits(['updateSuccessful']);
+
 
 // const updateUser = async () => {
 //   const response = await UpdateFunction();
@@ -201,9 +214,11 @@ const cancel = () => {
     // }
     router.push({ path: "/" });
 
-  
 
 };
+
+
+
 
 </script>
 
