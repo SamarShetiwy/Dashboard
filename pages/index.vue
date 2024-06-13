@@ -1,19 +1,38 @@
 <template lang="pug">
-div 
-button(@click="useToastSuccess()") click
+div(class="w-full max-w-sm pt-3 mt-[5rem] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-400 dark:border-gray-500")
+    div(class="flex justify-end px-4 ")
+        button(id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button")
+            span(class="sr-only") Open dropdown
+            //- svg(class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3")
+            //-     path(d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z")
+    div(id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700")
+            ul(class="py-2" aria-labelledby="dropdownButton")
+                li
+                    a(href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white") Edit
+                li
+                    a(href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white") Export Data
+                li
+                    a(href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white") Delete
+    div(class="flex flex-col items-center pb-5")
+        img(class="w-24 h-24 mb-1 rounded-full shadow-lg" src="/assets/images/2.jpg" alt="image")
+        h5(class="mb-1 text-xl font-medium text-gray-900 ") samar shetiwy
+        span(class="text-sm text-gray-900 ") Visual Designer
+        div(class="flex mt-4 md:mt-6")
+            a(href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800") Add friend
+            a(href="#" class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700") Message
 </template>
 
-<script setup>
-import { useToast } from 'vue-toast-notification';
-const toast = useToast();
-function useToastSuccess() {
-toast.success({
-    title: 'Success',
-    message: 'Your action was successful!',
-    duration: 5000
-});
 
-}
+
+<script setup>
+
+
+// definePageMeta({
+//     middleware: ["auth"]
+// });
+
+
+
 
 </script>
 

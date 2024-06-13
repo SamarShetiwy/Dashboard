@@ -28,9 +28,9 @@ export default defineNuxtConfig({
     cssPath: '~/assets/css/tailwind.css'
 
   },
-  router: {
-    middleware: ['auth']
-  },
+  // router: {
+  //   middleware: ['auth']
+  // },
   plugins: [
     // '~/plugins/toast.js',
     // '~/plugins/vue-tel-input.js'

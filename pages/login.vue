@@ -53,7 +53,6 @@ Form.relative.mt-20.px-6.py-10.flex.flex-col.justify-center(class="sm:py-12")(cl
 <script setup>
 import { useForm  } from 'vee-validate';
 import * as yup from 'yup';
-import { ref } from 'vue';
 import { useAuthStore } from '~/stores/auth';
 
 
@@ -61,9 +60,10 @@ const router = useRouter();
 const errorMessage = ref('');
 const authStore = useAuthStore();
 
+
 definePageMeta({
   layout:"login" 
-
+  
 })
 const { errors, handleSubmit, defineField } = useForm({
   validationSchema: yup.object({
