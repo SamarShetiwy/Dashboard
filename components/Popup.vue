@@ -6,6 +6,8 @@ div(v-if="show" class="popup" @click.self="closePopup" class= "flex justify-cent
         div
         Icon(name="ri:close-circle-line" @click="closePopup" size="30px"  color="red" class=" icon ")
     slot
+
+    
 </template>
 
 <script setup>

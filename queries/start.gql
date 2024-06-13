@@ -13,28 +13,39 @@ mutation EmailAndPasswordLoginBoard($input: LoginBoardInput!) {
   }
 
 
-query getUsersBoard($filter: UsersBoardFilter!, $paginate: PaginatorInput, $sortBy: UsersBoardSortEnum) {
-    usersBoard(filter: $filter, paginate: $paginate, sortBy: $sortBy) {
-    data{
-        items{
+query getUsersBoard(
+  $filter: UsersBoardFilter! = {}
+  $paginate: PaginatorInput
+  $sortBy: UsersBoardSortEnum
+) {
+  usersBoard(filter: $filter, paginate: $paginate, sortBy: $sortBy) {
+    data {
+      items {
+        id
+        firstName
+        nickname
+        enLastName
+        birthDate
+        phone
+        nationality {
           id
-          firstName
-          nickname
-          enLastName
-          birthDate
-          age
-          gender
-          email
-          city {
-            id
-          }
+          enName
+          isoCode
+        }
+        age
+        gender
+        email
+        city {
+          id
         }
       }
-      code
-      success
-      message
     }
-    }
+    code
+    success
+    message
+  }
+}
+
 
 
 query countries ($enableCities: Boolean) {

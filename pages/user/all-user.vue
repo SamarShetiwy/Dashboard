@@ -33,7 +33,8 @@
         
         
         Popup(:show="isPopupVisible" @update:show="isPopupVisible = $event")
-          userUpdate(:data="singleUser" @updateSuccessful="handleUpdateSuccessful")
+          userUpdate(:data="singleUser" @updateSuccessful="getAllUsers")
+        //- userUpdate(:show="isPopupVisible" @update:show="isPopupVisible = $event" :data="singleUser" @updateSuccessful="getAllUsers")
     
     
     

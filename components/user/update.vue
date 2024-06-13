@@ -20,7 +20,7 @@ div.p-4.pt-10.shadow-xl.bg-gray-300.rounded-xl.w-50
         div.mb-4
             label(for="nationality").text-gray-700.block.p-2 Nationality
             select(id="nationality" v-model="nationality"  class="border mt-1 block w-full p-1 rounded-full")
-                option(v-for="country in countries?.countries?.data" :value="country.enName" :key="country.id") {{ country.enName }}
+                option(v-for="country in countries?.countries?.data" :value="country.id" :key="country.id") {{ country.enName }}
             div.text-red-500.text-sm.mt-1 {{ nationalityError }} 
         div.mb-4
             label(for="gender").text-gray-700.block.p-2 Gender
@@ -50,6 +50,8 @@ import '@vuepic/vue-datepicker/dist/main.css';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { useToast } from 'vue-toast-notification';
 
+const emit = defineEmits(['updateSuccessful']);
+const toast = useToast();
 
 const date = ref(null);
 // const phone = ref('');
@@ -110,7 +112,7 @@ if (props.data) {
     lastName.value = props.data?.enLastName;
     email.value = props.data?.email;
     birthDate.value = useDateFormat(props.data?.birthDate);
-    nationality.value = props.data?.nationality;
+    nationality.value = props.data?.nationality?.id;
     gender.value = props.data?.gender;
     phone.value = props.data?.phone;
 }
@@ -158,7 +160,7 @@ const onSubmit = handleSubmit(async (values) => {
     // } catch (error) {
     //     console.error('Error adding user:', error);
     // }
-    alert(JSON.stringify(values, null,2))
+    // alert(JSON.stringify(values, null,2))
     const birthDateTimestamp = new Date(values.birthDate).valueOf();
     const { data } = await useAsyncGql({
         operation: 'updateUserBoard',
@@ -176,20 +178,18 @@ const onSubmit = handleSubmit(async (values) => {
         },
     });
 
-    // const emit = defineEmits(['updateSuccessful']);
-    const toast = useToast();
-    console.log('>>>>>>...',data.value.updateUserBoard?.message)
-    if (data.value.updateUserBoard.success) {
-    toast.success(data.value.updateUserBoard?.message,{
+    const res = data.value.updateUserBoard;
+    if (res?.success) {
+    toast.success(res?.message,{
         duration: 5000,
         position: 'top-right'
-        })
+        });
+        emit('updateSuccessful')
       } else {
-    toast.error(data.value.updateUserBoard?.message,{
+    toast.error(res?.message,{
         duration: 5000,
         position: 'top-right'
   });
-    // emit('updateSuccessful');
 
 }
 
