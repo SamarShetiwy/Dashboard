@@ -29,7 +29,7 @@ div.shadow-xl.mt-7.bg-gray-200.rounded-xl.container
                                 td.px-2.py-4 {{ user?.city }} 
                                     div.flex.gap-x-2
                                         button(:data="singleUser" @addSuccessful="handleAddSuccessful" @click="showPopup(user)" ).px-4.py-2.font-semibold.bg-white.rounded-full Update
-                                        button.px-4.py-2.font-semibold.bg-white.rounded-full(@click="deleteUser(user.id)") delete
+                                        button.px-4.py-2.font-semibold.bg-white.rounded-full(@click="deleteUser(user?.id)") delete
     
     
     Popup(:show="isPopupVisible" @update:show="isPopupVisible = $event")
@@ -40,6 +40,9 @@ div.shadow-xl.mt-7.bg-gray-200.rounded-xl.container
 </template>
 
 <script setup>
+
+import { useToast } from 'vue-toast-notification';
+const toast = useToast();
 
 
 const route= useRoute();
@@ -79,23 +82,29 @@ async function getAllUsers() {
       sortBy: "DATE_JOINED"
     }  
   });
-  users.value = data.value.usersBoard.data.items;
+  users.value = data.value?.usersBoard.data.items;
 
 }
+ async function deleteUser(userId) {
+   const { data } = await useAsyncGql('deleteUserBoard', {
+     userId
+     })
+    if (response.data.deleteUserBoard.success) {
+      toast.success(response.data?.deleteUserBoard?.message, {
+        duration: 5000,
+        position: 'top-right'
+      });
+    } else {
+      toast.error(response.data?.deleteUserBoard?.message, {
+        duration: 5000,
+        position: 'top-right'
+      });
+    }
+}
 
-const handleUpdateSuccessful = () => {
-  getAllUsers();
-};
 
-
-const handleAddSuccessful = () => {
-getAllUsers();
-};
-
-
-
-const deleteUser = (id) => {
-  users.value = users.value.filter(user => user.id !== id);};
+// const deleteUser = (id) => {
+//   users.value = users.value.filter(user => user.id !== id);};
 
 
 </script>

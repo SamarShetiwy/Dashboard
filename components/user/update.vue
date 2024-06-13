@@ -47,6 +47,7 @@ import DatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 // import VueTelInputVuetify from 'vue-tel-input-vuetify';
 // import 'vue-tel-input-vuetify/dist/vue-tel-input-vuetify.css';
+import 'vue-toast-notification/dist/theme-sugar.css';
 import { useToast } from 'vue-toast-notification';
 
 
@@ -182,7 +183,7 @@ const onSubmit = handleSubmit(async (values) => {
     toast.success(data.value.updateUserBoard?.message,{
         duration: 5000,
         position: 'top-right'
-        });
+        })
       } else {
     toast.error(data.value.updateUserBoard?.message,{
         duration: 5000,

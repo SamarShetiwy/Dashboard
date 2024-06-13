@@ -1,7 +1,7 @@
 <template lang="pug">
 div
     userAllUser
-    //- h1(@click="test") ghjkls
+
 
 </template>
 

@@ -46,6 +46,8 @@ import { useForm  } from 'vee-validate';
 import * as yup from 'yup';
 import DatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
+import 'vue-toast-notification/dist/theme-sugar.css';
+import { useToast } from 'vue-toast-notification';
 
 
 const date = ref(new Date);
@@ -81,7 +83,7 @@ const {data:countries, error} = await useAsyncGql('countries', {
     enableCities: true
 });
 // console.log('>>>>>>>>>>>>>>coun', countries.value?.countries?.data );
-
+const toast=useToast();
 const addUser = async (values) => {
     const birthDateTimestamp = new Date(values.birthDate).valueOf();
     const { data } = await useAsyncGql({
@@ -99,11 +101,18 @@ const addUser = async (values) => {
 });
 
     if (data.value.createUserBoard.success) {
-        return data.value.createUserBoard.data;
-    } else {
-        throw new Error(data.value.createUserBoard.message);
+        toast.success(data.value.createUserBoard?.message,{
+            duration:5000,
+            position: 'top-right'
+        }); 
         }
+        else {
+        toast.error(data.value.createUserBoard?.message,{
+            duration:5000,
+            position: 'top-right'
+        })   
 };
+}
 
 const onSubmit = handleSubmit(async (values) => {
 try {
