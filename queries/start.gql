@@ -114,4 +114,12 @@ mutation deleteUserBoard($userId: ID!) {
   }
 }
 
+query admin{
+  me{
+    data{
+      id
+    }
+  }
+}
+
 

@@ -93,7 +93,7 @@ const [password, passwordAttrs] = defineField('password');
 const onSubmit = handleSubmit(async (values) => {
   try {
     await authStore.login(values.email, values.password);
-    router.push({ name: 'index' });
+    router.push('/');
   } catch (error) {
     console.error('Error logging in:', error);
     errorMessage.value = 'Login failed. Please try again.';

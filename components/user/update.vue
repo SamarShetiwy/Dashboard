@@ -35,7 +35,7 @@ div.p-4.pt-10.shadow-xl.bg-gray-300.rounded-xl.w-50
 
         div.mb-4.flex.gap-5.mt-10.justify-end.pr-5
             button(type="submit"  class="px-5 py-2 text-semibold bg-white rounded-full") Update
-            button(type="button" @click="cancel"  class="px-4 py-2 text-semibold bg-white rounded-full") Cancel 
+            button(type="button" @click="closePopup"  class="px-4 py-2 text-semibold bg-white rounded-full") Cancel 
 </template>
 
 <script setup>
