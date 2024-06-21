@@ -32,9 +32,9 @@
                                             button.px-4.py-2.font-semibold.bg-white.rounded-full(@click="deleteUser(user?.id)") delete
         
         
-        Popup(:show="isPopupVisible" @update:show="isPopupVisible = $event")
-          userUpdate(:data="singleUser" @updateSuccessful="getAllUsers")
-        //- userUpdate(:show="isPopupVisible" @update:show="isPopupVisible = $event" :data="singleUser" @updateSuccessful="getAllUsers")
+        //- Popup(:show="isPopupVisible" @update:show="isPopupVisible = $event")
+        //-   userUpdate(:data="singleUser" @updateSuccessful="getAllUsers")
+        Popup(:show="isPopupVisible" @update:show="isPopupVisible = $event" :data="singleUser" @updateSuccessful="getAllUsers")
     
     
     

@@ -15,7 +15,7 @@ div.container.mx-auto.p-4.pt-8.ml-7.shadow-xl.mt-7.bg-gray-200.rounded-xl
             div.text-red-500.text-sm.mt-1(v-if="errors.email") {{ errors.email }}
         div.mb-4
             label(for="birthDate").text-gray-700.block.p-2 BirthDate
-            DatePicker(id="birthDate" v-model="birthDate" v-bind="birthDateProps" type="text" class=" border mt-1 block w-full p-1 rounded-full")
+            DatePicker(id="birthDate" v-model="birthDate"  @update:modelValue="updateBirthDate" v-bind="birthDateProps" type="text" class=" border mt-1 block w-full p-1 rounded-full")
             div.text-red-500.text-sm.mt-1(v-if="errors.birthDate") {{ errors.birthDate }}
 
         div.mb-4
@@ -50,7 +50,10 @@ import 'vue-toast-notification/dist/theme-sugar.css';
 import { useToast } from 'vue-toast-notification';
 
 
-const date = ref(new Date);
+const updateBirthDate = (newValue) => {
+   birthDate.value = newValue;
+};
+
 
 
 const { errors, handleSubmit, defineField,resetForm} = useForm({
@@ -129,11 +132,9 @@ try {
 
 
 const router = useRouter();
-
 const cancel = () => {
     router.push({ path: "/user/all-user" });
 };
-
 
 </script>
 
