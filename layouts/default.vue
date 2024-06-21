@@ -1,8 +1,8 @@
 <template lang="pug">
-container.flex.bg-gray-300.w-full
-            aside(class="md:w-[15rem] w-[10rem] h-screen md:px-10 px-5 py-2")
+container(class="flex bg-[#312e81] w-full")
+            aside(class="md:w-[15rem] w-[10rem] h-screen bg-[#312e81] md:px-10 px-5 py-2")
                 Sidebar
-            div(class="w-3/4").container
+            div(class="w-100 bg-[#c7d2fe]").container.my-5.rounded-lg.mr-7
                 header.flex.flex-col.justify-center.top-0
                     Navbar 
                 content.h-screen.mt-10.rounded-xl.pt-10.shadow-xl

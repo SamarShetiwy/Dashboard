@@ -1,47 +1,46 @@
 <template lang="pug">
 div(v-if="show" class="popup" @click.self="closePopup" class= "flex justify-center items-center mb-0")
-  div.popup-content(class=" items-center h-screen")
-    .header
-      .flex.justify-between.align-center
-        div
-        Icon(name="ri:close-circle-line" @click="closePopup" size="30px"  color="red" class=" icon ")
-    div.p-4.pt-10.shadow-xl.bg-gray-300.rounded-xl.w-50
-      form(@submit.prevent="onSubmit")
-          div.mb-4
-              label(for="firstName").text-gray-700.block.p-2 FirstName
-              input(id="firstName"  v-model="firstName" type="text" class="border mt-1 block w-full p-1 rounded-full")
-              div.text-red-500.text-sm.mt-1 {{ firstNameError }} 
-          div.mb-4
-              label(for="lastName").text-gray-700.block.p-2 LastName
-              input(id="lastName"  v-model="lastName"   type="text" class=" border mt-1 block w-full p-1 rounded-full")
-              div.text-red-500.text-sm.mt-1 {{lastNameError }} 
-          div.mb-4
-              label(for="email").text-gray-700.block.p-2 Email
-              input(id="email" v-model="email"    type="email" class="border mt-1 block w-full p-1 rounded-full")
-              div.text-red-500.text-sm.mt-1 {{ emailError }} 
-          div.mb-4
-              label(for="birthDate").text-gray-700.block.p-2 BirthDate
-              DatePicker(id="birthDate" v-model="birthDate"  @update:modelValue="updateBirthDate" type="text" class=" border mt-1 block w-full p-1 rounded-full")
-              div.text-red-500.text-sm.mt-1 {{ birthDateError }} 
-          div.mb-4
-              label(for="nationality").text-gray-700.block.p-2 Nationality
-              select(id="nationality" v-model="nationality"  class="border mt-1 block w-full p-1 rounded-full")
-                  option(v-for="country in countries?.countries?.data" :value="country.id" :key="country.id") {{ country.enName }}
-              div.text-red-500.text-sm.mt-1 {{ nationalityError }} 
-          div.mb-4
-              label(for="gender").text-gray-700.block.p-2 Gender
-              select(id="gender" v-model="gender"  class=" border mt-1 block w-full p-1 rounded-full")
-                  option(value="MALE") Male
-                  option(value="FEMALE") Female
-              div.text-red-500.text-sm.mt-1 {{ genderError }} 
-          div.mb-4
-              label(for="phone").text-gray-700.block.p-2 Phone
-              input(id="phone" v-model="phone" type="text" class="border mt-1 block w-full p-1 rounded-full")
-              div.text-red-500.text-sm.mt-1 {{ phoneError }}
-
-          div.mb-4.flex.gap-5.mt-10.justify-end.pr-5
-              button(type="submit"  class="px-5 py-2 text-semibold bg-white rounded-full") Update
-              button(type="button" @click="closePopup"  class="px-4 py-2 text-semibold bg-white rounded-full") Cancel  
+    div.popup-content(class=" items-center h-screen")
+        .header
+            .flex.justify-between.align-center
+                div
+                Icon(name="ri:close-circle-line" @click="closePopup" size="30px"  color="red" class=" icon ")
+        div.p-4.pt-10.shadow-xl.rounded-xl(class="bg-[#c7d2fe] w-[30rem] h-[50rem] rounded-3xl shadow-xl")
+            form(@submit.prevent="onSubmit")
+                div.mb-4
+                    label(for="firstName"  class="text-[#312e81]").text-gray-700.block.p-2 FirstName
+                    input(id="firstName"  v-model="firstName" type="text" class="border mt-1  text-[#6366f1] block w-full p-1 rounded-full")
+                    div.text-red-500.text-sm.mt-1 {{ firstNameError }} 
+                div.mb-4
+                    label(for="lastName" class="text-[#312e81]").text-gray-700.block.p-2 LastName
+                    input(id="lastName"  v-model="lastName"   type="text" class=" border mt-1  text-[#6366f1] block w-full p-1 rounded-full")
+                    iv.text-red-500.text-sm.mt-1 {{lastNameError }} 
+                div.mb-4
+                    label(for="email" class="text-[#312e81]").text-gray-700.block.p-2 Email
+                    input(id="email" v-model="email"    type="email" class="border mt-1 block  text-[#6366f1] w-full p-1 rounded-full")
+                    div.text-red-500.text-sm.mt-1 {{ emailError }} 
+                div.mb-4
+                    label(for="birthDate" class="text-[#312e81]").text-gray-700.block.p-2 BirthDate
+                    DatePicker(id="birthDate" v-model="birthDate"  @update:modelValue="updateBirthDate" type="text" class=" border  text-[#6366f1] mt-1 block w-full p-1 rounded-full")
+                    div.text-red-500.text-sm.mt-1 {{ birthDateError }} 
+                div.mb-4
+                    label(for="nationality" class="text-[#312e81]").text-gray-700.block.p-2 Nationality
+                    select(id="nationality" v-model="nationality"  class="border  text-[#6366f1] mt-1 block w-full p-1 rounded-full")
+                        option(v-for="country in countries?.countries?.data" :value="country.id" :key="country.id") {{ country.enName }}
+                    div.text-red-500.text-sm.mt-1 {{ nationalityError }} 
+                div.mb-4
+                    label(for="gender" class="text-[#312e81]").text-gray-700.block.p-2 Gender
+                    select(id="gender" v-model="gender"  class=" border mt-1 block text-[#6366f1]  w-full p-1 rounded-full")
+                        option(value="MALE") Male
+                        option(value="FEMALE") Female
+                    div.text-red-500.text-sm.mt-1 {{ genderError }} 
+                div.mb-4
+                    label(for="phone" class="text-[#312e81]").text-gray-700.block.p-2 Phone
+                    input(id="phone" v-model="phone" type="text" class="border mt-1  text-[#6366f1] block w-full p-1 rounded-full")
+                    div.text-red-500.text-sm.mt-1 {{ phoneError }}
+                div.mb-4.flex.gap-5.mt-10.justify-end.pr-5
+                    button(type="submit"  class="px-5 py-2 text-semibold text-white  bg-[#312e81] rounded-full") Update
+                    button(type="button" @click="closePopup"  class="px-4 py-2 text-semibold text-white bg-[#312e81]  rounded-full") Cancel  
 
     
 </template>
@@ -76,10 +75,6 @@ const closePopup = () => {
 
 const toast = useToast();
 
-
-const updateBirthDate = (newValue) => {
-   birthDate.value = newValue;
-};
 
 const router=useRouter();
 
@@ -120,6 +115,9 @@ const { value: nationality, errorMessage: nationalityError  } = useField('nation
 const { value: gender, errorMessage: genderError  } = useField('gender');
 const { value: phone, errorMessage: phoneError  } = useField('phone');
 
+const updateBirthDate = (newValue) => {
+    birthDate.value = newValue;
+};
 
 console.log('>>>>>>>>>>>>>>.', props.data);
 
@@ -180,20 +178,10 @@ const { data: countries, error } = await useAsyncGql('countries', {
 //     }
 // };
 
-
+const isUpdating  = ref(false);
 const onSubmit = handleSubmit(async (values) => {
-    // alert(JSON.stringify(values))
-    // try {
-    //     const result = await updateUserGraph(values);
-    //     console.log('User added:', result);
-    //     emit('updateSuccessful');
-    
-    // } catch (error) {
-    //     console.error('Error adding user:', error);
-    // }
-    // alert(JSON.stringify(values, null,2))
-    if (isUpdating) return; // prevent multiple updates
-    isUpdating = true;
+    // if (isUpdating.value) return;
+    // isUpdating.value = true;
     const birthDateTimestamp = new Date(values.birthDate).valueOf();
     const { data } = await useAsyncGql({
         operation: 'updateUserBoard',
@@ -270,9 +258,8 @@ const cancel = () => {
   
     &-content {
     align-items: center;
-    width: 50%;
     margin-top:10rem ;
-    background: transparent;
+    // background: transparent;
     z-index: 1000;
     border-radius: 10px;
 

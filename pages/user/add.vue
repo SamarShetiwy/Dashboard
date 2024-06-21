@@ -1,43 +1,43 @@
 <template lang="pug">
-div.container.mx-auto.p-4.pt-8.ml-7.shadow-xl.mt-7.bg-gray-200.rounded-xl
-    form(@submit.prevent="onSubmit")
-        div.mb-4
-            label(for="firstName").text-gray-700.block.p-2 FirstName
-            input(id="firstName"  v-model="firstName"  v-bind="firstNameProps" type="text" class="border mt-1 block w-full p-1 rounded-full")
+div.container.mx-auto.p-4.pt-8.shadow-xl.mt-2.rounded-xl.flex.items-center.justify-center
+    form(@submit.prevent="onSubmit" class="bg-[#eef2ff] w-[40rem] rounded-3xl shadow-xl").ml-2.flex.items-center.flex-col
+        div.mb-4(class="w-[30rem] mt-3")
+            label(for="firstName" class="text-[#312e81]").block.p-2 FirstName
+            input(id="firstName"  v-model="firstName"  v-bind="firstNameProps" type="text" class="border mt-1 text-[#6366f1] block w-full p-1 rounded-full")
             div.text-red-500.text-sm.mt-1(v-if="errors.firstName") {{ errors.firstName }}
-        div.mb-4
-            label(for="lastName").text-gray-700.block.p-2 LastName
-            input(id="lastName" v-model="lastName"  v-bind="lastName" type="text" class=" border mt-1 block w-full p-1 rounded-full")
+        div.mb-4(class="w-[30rem]")
+            label(for="lastName" class="text-[#312e81]").block.p-2 LastName
+            input(id="lastName" v-model="lastName"  v-bind="lastName" type="text" class=" border mt-1 block text-[#6366f1]  w-full p-1 rounded-full")
             div.text-red-500.text-sm.mt-1(v-if="errors.lastName") {{ errors.lastName }} 
-        div.mb-4
-            label(for="email").text-gray-700.block.p-2 Email
-            input(id="email" v-model="email"   v-bind="emailProps" type="text" class="border mt-1 block w-full p-1 rounded-full")
+        div.mb-4(class="w-[30rem]")
+            label(for="email" class="text-[#312e81]").block.p-2 Email
+            input(id="email" v-model="email"   v-bind="emailProps" type="text" class="border mt-1 block text-[#6366f1] w-full p-1 rounded-full")
             div.text-red-500.text-sm.mt-1(v-if="errors.email") {{ errors.email }}
-        div.mb-4
-            label(for="birthDate").text-gray-700.block.p-2 BirthDate
-            DatePicker(id="birthDate" v-model="birthDate"  @update:modelValue="updateBirthDate" v-bind="birthDateProps" type="text" class=" border mt-1 block w-full p-1 rounded-full")
+        div.mb-4(class="w-[30rem]")
+            label(for="birthDate" class="text-[#312e81]").block.p-2 BirthDate
+            DatePicker(id="birthDate" v-model="birthDate"  @update:modelValue="updateBirthDate" v-bind="birthDateProps" type="text" class=" border mt-1 text-[#6366f1] block w-full p-1 rounded-full")
             div.text-red-500.text-sm.mt-1(v-if="errors.birthDate") {{ errors.birthDate }}
 
-        div.mb-4
-            label(for="nationality").text-gray-700.block.p-2 Nationality
+        div.mb-4(class="w-[30rem]")
+            label(for="nationality " class="text-[#312e81]").block.p-2 Nationality
             //- pre {{ countries?.countries?.data }}
-            select(id="nationality"  v-model="nationality" v-bind="nationalityProps" class="border mt-1 block w-full p-1 rounded-full") 
+            select(id="nationality"  v-model="nationality" v-bind="nationalityProps" class="border mt-1 text-[#6366f1] block w-full p-1 rounded-full") 
                 option(v-for="country in  countries?.countries?.data"  :value="country.id" :key="country.id") {{ country.enName }}
             div.text-red-500.text-sm.mt-1(v-if="errors.nationality") {{ errors.nationality}}
-        div.mb-4
-            label(for="gender").text-gray-700.block.p-2 Gender
-            select(id="gender" v-model="gender"  v-bind="genderProps" class=" border mt-1 block w-full p-1 rounded-full")
+        div.mb-4(class="w-[30rem]")
+            label(for="gender" class="text-[#312e81]").text-gray-700.block.p-2 Gender
+            select(id="gender" v-model="gender"  v-bind="genderProps" class=" border mt-1 text-[#6366f1] block w-full p-1 rounded-full")
                 option(value="MALE") Male
                 option(value="FEMALE") Female
             div.text-red-500.text-sm.mt-1(v-if="errors.gender") {{ errors.gender }}
 
-        div.mb-4
-            label(for="phone").text-gray-700.block.p-2 Phone
-            input(id="phone"  v-model="phone"  v-bind="phoneProps" type="text" class="border mt-1 block w-full p-1 rounded-full")
+        div.mb-4(class="w-[30rem]")
+            label(for="phone" class="text-[#312e81]").text-gray-700.block.p-2 Phone
+            input(id="phone"  v-model="phone"  v-bind="phoneProps" type="text" class="border mt-1 text-[#6366f1] block w-full p-1 rounded-full")
             div.text-red-500.text-sm.mt-1(v-if="errors.phone") {{ errors.phone }}                
         div.mb-4.flex.gap-5.mt-10.justify-end.pr-5
-            button(type="submit" class="px-5 py-2 text-semibold bg-white rounded-full") Add
-            button(type="button" @click="cancel()" class="px-4 py-2 text-semibold bg-white rounded-full") Cancel 
+            button(type="submit" class="px-5 py-2 text-semibold text-white bg-[#312e81] rounded-full") Add 
+            button(type="button" @click="cancel()" class="px-4 py-2 text-semibold  text-white bg-[#312e81] rounded-full") Cancel 
 </template>
 
 <script setup>
@@ -48,12 +48,6 @@ import DatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { useToast } from 'vue-toast-notification';
-
-
-const updateBirthDate = (newValue) => {
-   birthDate.value = newValue;
-};
-
 
 
 const { errors, handleSubmit, defineField,resetForm} = useForm({
@@ -81,6 +75,9 @@ const [ nationality,nationalityProps] = defineField('nationality');
 const [ gender,genderProps] = defineField('gender');
 const [ phone, phoneProps]= defineField('phone');
 
+const updateBirthDate = (newValue) => {
+    birthDate.value = newValue;
+};
 
 const {data:countries, error} = await useAsyncGql('countries', {
     enableCities: true
@@ -116,6 +113,9 @@ const addUser = async (values) => {
         })   
 };
 }
+
+
+
 
 const onSubmit = handleSubmit(async (values) => {
 try {
