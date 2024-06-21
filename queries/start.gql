@@ -13,6 +13,11 @@ mutation EmailAndPasswordLoginBoard($input: LoginBoardInput!) {
   }
 
 
+
+
+
+
+
 query getUsersBoard(
   $filter: UsersBoardFilter! = {}
   $paginate: PaginatorInput
@@ -114,12 +119,25 @@ mutation deleteUserBoard($userId: ID!) {
   }
 }
 
-query admin{
-  me{
-    data{
+
+# query adminUserBoard($userId:String!,) {
+#   adminUserBoard(userId: $userId) {
+#     data {
+#       id
+#       token
+#       role
+#     }
+#   }
+# }
+
+
+query me {
+  me {
+    data {
       id
+      token
+      role
+      }
     }
   }
-}
-
 

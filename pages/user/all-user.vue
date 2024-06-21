@@ -19,7 +19,7 @@
                                     th.position-sticky.top-0.px-6.py-4 Gender
                                     th.position-sticky.top-0.px-6.py-4.w-20 Action 
                             tbody
-                                tr.border-b.border-gray-100(v-for="user in users" :key="user.id")
+                                tr.border-b.border-gray-100(v-for="user in users" :key="user.id").element-id
                                     td.px-2.py-4 {{ user?.firstName }}
                                     td.px-2.py-4 {{ user?.enLastName }}
                                     td.px-2.py-4 {{ formatDate(user?.birthDate) }}
@@ -79,7 +79,7 @@
         variables: 
         { 
           filter: { role:"USER" },
-          paginate: { page: 1, limit: 10 },
+          paginate: { page: 1, limit: 20},
           sortBy: "DATE_JOINED"
         }  
       });
@@ -91,13 +91,14 @@
          userId
          })
          console.log(response)
-        if (response.deleteUserBoard.success) {
-          toast.success(response.deleteUserBoard.message, {
+        if (response.value.deleteUserBoard.deleteUserBoard.success) {
+          toast.success(response.value.deleteUserBoard.message, {
             duration: 5000,
             position: 'top-right'
           });
+          document.getElementById('element-id').classList.add('deleted');
         } else {
-          toast.error(response.deleteUserBoard.message, {
+          toast.error(response.value.deleteUserBoard.message, {
             duration: 5000,
             position: 'top-right'
           });
@@ -117,5 +118,8 @@
     //     position: sticky;
     //     top: 0;
     // }
+    .deleted {
+      color: red; 
+}
     
     </style>
