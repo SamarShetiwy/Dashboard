@@ -7,7 +7,7 @@ div.shadow-lg.mt-5.rounded-xl.container
         div.flex.flex-col.mx-4.mb-4(class="bg-[#eef2ff] w-100 rounded-3xl shadow-xl")
             div.overflow-scroll
                 table.text-left.text-sm.font-semibold.mt-4.h-screen.w-full.min-w-max.over-flow-hidden.lg-overflow-scroll.ml-3
-                    thead.border-b.border-gray-100(class="text-[#312e81]") 
+                    thead(class="text-[#312e81] border-b border-[#312e81]") 
                         tr
                             th.position-sticky.top-0.px-2.py-4 FirstName
                             th.position-sticky.top-0.px-2.py-4 NickName
@@ -17,7 +17,7 @@ div.shadow-lg.mt-5.rounded-xl.container
                             th.position-sticky.top-0.px-2.py-4 Gender
                             th.position-sticky.top-0.px-2.py-4.w-20 Action 
                     tbody(class="text-[#6366f1]") 
-                        tr.border-b( :id="'user-row-' + user.id" v-for="user in users" :key="user.id")
+                        tr.border-b( class=" border-[#9492c0] " :id="'user-row-' + user.id" v-for="user in users" :key="user.id")
                             td.px-2.py-4 {{ user?.firstName }}
                             td.px-2.py-4 {{ user?.enLastName }}
                             td.px-2.py-4 {{ formatDate(user?.birthDate) }}
@@ -26,12 +26,9 @@ div.shadow-lg.mt-5.rounded-xl.container
                             td.px-2.py-4 {{ user?.gender }}
                             td.px-2.py-4 {{ user?.city }} 
                                 div.flex.gap-x-2
-                                    button( class="text-[#312e81]" :data="singleUser" @addSuccessful="handleAddSuccessful" @click="showPopup(user)" ).px-4.py-2.font-semibold.bg-white.rounded-full Update
+                                    button( class="text-[#312e81] " :data="singleUser" @addSuccessful="handleAddSuccessful" @click="showPopup(user)" ).px-4.py-2.font-semibold.bg-white.rounded-full Update
                                     button.px-4.py-2.font-semibold.bg-white.rounded-full(class="text-[#312e81]" @click="deleteUser(user?.id)") delete
-        
-        
-        //- Popup(:show="isPopupVisible" @update:show="isPopupVisible = $event")
-        //-   userUpdate(:data="singleUser" @updateSuccessful="getAllUsers")
+                                    
         Popup(:show="isPopupVisible" @update:show="isPopupVisible = $event" :data="singleUser" @updateSuccessful="getAllUsers")
     
     
@@ -39,14 +36,12 @@ div.shadow-lg.mt-5.rounded-xl.container
 </template>
     
     <script setup>
-    
+    // import { useDeletedUsersStore } from '~/stores/delete';
     import { useToast } from 'vue-toast-notification';
+    
     const toast = useToast();
-    
-    
     const route= useRoute();
     const users = ref([]);
-    
     const formatDate = (date) => {
       return useDateFormat(date)
     }
@@ -58,14 +53,6 @@ div.shadow-lg.mt-5.rounded-xl.container
       singleUser.value = user;
     }
     
-    // const token = localStorage.getItem('token');
-    // useGqlToken(`Bearer ${token}`)
-    // const {data:usersData, error} = await useAsyncData('allUsers', gqlGetUsersBoard,{
-    //     filter: { role:"USER" },
-    //     paginate: { page: 1, limit: 10 },
-    //     sortBy: "DATE_JOINED"
-    // })
-    // users.value = usersData.value.usersBoard.data.items;
     onMounted(async() => {
       const token = localStorage.getItem('token');
       useGqlToken(`Bearer ${token}`)
@@ -84,19 +71,27 @@ div.shadow-lg.mt-5.rounded-xl.container
       users.value = data.value?.usersBoard.data.items;
     
     }
-
     async function deleteUser(userId) {
+    // const store = useDeletedUsersStore();
     const { data: response } = await useAsyncGql('deleteUserBoard', { userId });
     console.log(response);
     if (response.value.deleteUserBoard.success) {
+        // store.addUserToDeleted(userId);
         toast.success(response.value.deleteUserBoard.message, { duration: 5000, position: 'top-right' });
-        console.log(`Attempting to add 'deleted' class to element with ID: user-row-${userId}`);
         document.getElementById(`user-row-${userId}`).classList.add('deleted');
+        localStorage.setItem(`user-row-${userId}`, 'deleted');
     } else {
         toast.error(response.value.deleteUserBoard.message, { duration: 5000, position: 'top-right' });
     }
 }
 
+// onMounted(() => {
+//   const store = useDeletedUsersStore();
+//   const deletedUsers = store.deletedUsers;
+//   deletedUsers.forEach(userId => {
+//     document.getElementById(`user-row-${userId}`).classList.add('deleted');
+//   });
+// });
     // const deleteUser = (id) => {
     //   users.value = users.value.filter(user => user.id !== id);};
     
@@ -105,10 +100,6 @@ div.shadow-lg.mt-5.rounded-xl.container
     
     <style lang="scss" scoped>
     
-    // .sticky {
-    //     position: sticky;
-    //     top: 0;
-    // }
     .deleted  {
 
       background-color:#312e81; 

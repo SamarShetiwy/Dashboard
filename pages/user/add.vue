@@ -75,10 +75,14 @@ const [ nationality,nationalityProps] = defineField('nationality');
 const [ gender,genderProps] = defineField('gender');
 const [ phone, phoneProps]= defineField('phone');
 
+
+
 const updateBirthDate = (newValue) => {
     birthDate.value = newValue;
 };
-
+watch(birthDate, (newValue) => {
+    console.log('birthDate updated:', newValue);
+});
 const {data:countries, error} = await useAsyncGql('countries', {
     enableCities: true
 });

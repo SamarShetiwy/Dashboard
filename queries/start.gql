@@ -120,15 +120,6 @@ mutation deleteUserBoard($userId: ID!) {
 }
 
 
-# query adminUserBoard($userId:String!,) {
-#   adminUserBoard(userId: $userId) {
-#     data {
-#       id
-#       token
-#       role
-#     }
-#   }
-# }
 
 
 query me {

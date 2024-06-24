@@ -121,18 +121,6 @@ const updateBirthDate = (newValue) => {
 
 console.log('>>>>>>>>>>>>>>.', props.data);
 
-// if (props.data) {
-//     initialValues.userId= values.userId,
-//     firstName.value = props.data?.firstName;
-//     lastName.value = props.data?.enLastName;
-//     email.value = props.data?.email;
-//     birthDate.value = useDateFormat(props.data?.birthDate);
-//     nationality.value = props.data?.nationality?.id;
-//     gender.value = props.data?.gender;
-//     phone.value = props.data?.phone;
-// }
-// console.log( initialValues.userId);
-
 watch(() => props.data, (newData) => {
 if (newData) {
   initialValues.userId = newData.id;
@@ -152,31 +140,6 @@ const { data: countries, error } = await useAsyncGql('countries', {
     enableCities: true
 });
 
-
-
-// const updateUserGraph = async (values) => {
-//     const birthDateTimestamp = new Date(values.birthDate).valueOf();
-//     const { data } = await useAsyncGql({
-//         operation: 'updateUserBoard',
-//         variables: {
-//             input: {
-//                 userId: initialValues.userId,
-//                 firstName: values.firstName,
-//                 lastName: values.nickname,
-//                 email: values.email,
-//                 birthDate: birthDateTimestamp,
-//                 nationalityId: values.nationality,
-//                 gender: values.gender,
-//                 phone: values.phone
-//             }
-//         },
-//     });
-//     if (data.value.updateUserBoard.success) {
-//         return data.value.updateUserBoard.data;
-//     } else {
-//         throw new Error(data.value.updateUserBoard.message);
-//     }
-// };
 
 const isUpdating  = ref(false);
 const onSubmit = handleSubmit(async (values) => {
@@ -217,22 +180,7 @@ const onSubmit = handleSubmit(async (values) => {
 
 
 
-// const updateUser = async () => {
-//   const response = await UpdateFunction();
-//   if (response.success) {
-//     emit('updateSuccessful');
-//   }
-// };
-
-
-
 const cancel = () => {
-    // if(loading.value){
-    //     router.push({ path: "/user/all-user" });
-    //     toast.success('تم تحديث البيانات بنجاح')  
-    // }else{
-    //     toast.error(' يوجد خطا ')   
-    // }
     router.push({ path: "/" });
 
 
@@ -259,7 +207,6 @@ const cancel = () => {
     &-content {
     align-items: center;
     margin-top:10rem ;
-    // background: transparent;
     z-index: 1000;
     border-radius: 10px;
 

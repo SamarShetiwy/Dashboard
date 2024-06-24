@@ -18,13 +18,6 @@ div(class="w-[24rem] mt-5 ml-5 h[20rem] bg-[#e0e7ff]  shadow-lg rounded-xl")
 
 <script setup>
 
-// definePageMeta({
-//     middleware: ["auth"]
-// });
-
-
-
-
 </script>
 
 <style lang="scss" scoped>

@@ -28,29 +28,7 @@ NuxtScrollbar(tag="aside" @ps-scroll-y="onScroll")
 </template>
     
     <script setup>
-    // const menu = [
-    //     {
-    //         name: 'Providers',
-    //         to: '/providers'
-    //     },
-    //     {
-    //         name: 'Clients',
-    //         to: '/clients'
-    //     },
-    //     {
-    //         name: 'Reviews',
-    //         to: '/reviews'
-    //     },
-    //     {
-    //         name: 'Users',
-    //         to: '/user',
-    //         items: [
-    //             { tittle: 'add', to: '/add'},
-    //             { tittle: 'edit' , to: '/edit'},
-    //             { tittle: 'delete' , to: '/delete'}
-    //         ]
-    //     }
-    // ]
+   
     </script>
     
     <style lang="scss" scoped>
